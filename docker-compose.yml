@@ -2,10 +2,10 @@ version: "2"
 
 services:
     web:
-        image: thepixeldeveloper/nolimits-exchange-web:latest
+        image: quay.io/thepixeldeveloper/nolimits-exchange-web
         volumes:
             - ~/.composer/auth.json:/var/www/composer/auth.json
-            - ./projects/website.:/var/www/nolimits
+            - ./projects/website:/var/www/nolimits
         links:
             - db
         extra_hosts:
