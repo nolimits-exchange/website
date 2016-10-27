@@ -1,0 +1,17 @@
+---
+version: 2
+
+composer:
+    prefer-source: false
+    no-dev: true
+    no-plugins: false
+    no-scripts: false
+
+post:
+    path: bin/console
+    args:
+        - "doctrine:migrations:migrate"
+        - "-n"
+
+sustained:
+    - vendor
