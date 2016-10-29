@@ -3,10 +3,15 @@ version: "2"
 services:
     web:
         image: quay.io/thepixeldeveloper/nolimits-exchange-web
+        volumes:
+            - ./projects/website:/var/www/nolimits
 
     db:
         image: mysql:latest
-
-    worker:
-        extends:
-            service: web
+        volumes:
+            - ./db/base.sql:/docker-entrypoint-initdb.d/base.sql
+        environment:
+            MYSQL_ROOT_PASSWORD: nolimits
+            MYSQL_DATABASE: nolimits
+            MYSQL_USER: nolimits
+            MYSQL_PASSWORD: nolimits
