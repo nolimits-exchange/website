@@ -1,0 +1,41 @@
+<table class="coasters">
+    <thead>
+    <tr>
+        <th colspan="3"></th>
+        <th>Downloads</th>
+        <th>Rating</th>
+    </tr>
+    </thead>
+    {{#coasters}}
+    <tr>
+        <td class="thumbnail"><a href="{{url}}"><img src="{{thumb}}" width="40" height="35" alt="{{name}}"/></a></td>
+        <td class="name">
+            <h4 class="title"><a href="{{url}}">{{name}}</a></h4>
+            <p class="author"><a href="{{user_url}}">{{user}}</a></p>
+        </td>
+        <td>
+            <p>
+
+                {{#state}}<a href="{{url}}" class="button edit">{{name}}</a>{{/state}}
+                {{#edit}}<a href="{{edit}}" class="button edit">Edit</a>{{/edit}}
+
+                {{#downloaded}}
+                <span class="button">{{#rated}}Rated{{/rated}}{{^rated}}Unrated{{/rated}}</span>
+                {{/downloaded}}
+            </p>
+        </td>
+        <td class="rating">
+            <p>{{downloads}}</p>
+        </td>
+        <td class="rating">
+            <p>{{rating}}</p>
+        </td>
+    </tr>
+    {{/coasters}}
+
+</table>
+{{&pagination}}
+{{/has_coasters}}
+{{^has_coasters}}
+<p>No roller coasters to display.</p>
+{{/has_coasters}}

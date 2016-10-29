@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Contact - Nolimits Exchange{% endblock %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>Contact Us</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                            {{ form_start(form) }}
+
+                            <p>Have you checked the <a href="{{ path('faq') }}" title="Frequently Asked Questions">Frequently Asked Questions</a>?</p>
+
+                            {{ form_errors(form) }}
+                            {{ form_row(form.name, { 'attr': { 'class': 'input-lg'}}) }}
+                            {{ form_row(form.email,  { 'attr': { 'class': 'input-lg'}}) }}
+                            {{ form_row(form.reason) }}
+                            {{ form_row(form.message,  { 'attr': { 'rows': '3'}}) }}
+                            {{ form_row(form.send, { 'attr': { 'class': 'btn-primary btn-lg pull-right'} }) }}
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

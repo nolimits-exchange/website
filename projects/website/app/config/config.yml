@@ -1,0 +1,208 @@
+imports:
+    - { resource: parameters.php }
+    - { resource: security.yml }
+    - { resource: mysql_extensions.yml }
+    - { resource: config_faker.yml }
+
+parameters:
+    locale: en
+    jobqueue.service.class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\QueueService
+
+sentry:
+    environment: "%kernel.environment%"
+    dsn: ""
+
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    port:      "%mailer_port%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:
+        type: memory
+
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            StofDoctrineExtensionsBundle: ~
+
+framework:
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+stof_doctrine_extensions:
+    default_locale: en_GB
+    orm:
+        default:
+            tree: true
+
+heri_job_queue:
+    adapter: "doctrine"
+    queues:
+        - "process_file_upload"
+
+oneup_flysystem:
+    adapters:
+        former:
+           awss3v3:
+                client: flysystem.s3_client_former
+                bucket: "%former_object_storage_bucket%"
+
+        ephemeral:
+            local:
+                directory: "%object_storage_tmp%/ephemeral"
+
+        coasters:
+            awss3v3:
+                client: flysystem.s3_client
+                bucket: "%object_storage_bucket%"
+                prefix: "private/files"
+
+        screenshots:
+            awss3v3:
+                client: flysystem.s3_client
+                bucket: "%object_storage_bucket%"
+                prefix: "images"
+
+    filesystems:
+        former:
+            adapter: former
+            mount: former
+
+        ephemeral:
+            adapter: ephemeral
+            mount: ephemeral
+
+        coasters:
+            adapter: coasters
+            mount: coasters
+
+        screenshots:
+            adapter: screenshots
+            mount: screenshots
+
+services:
+
+#    faker.provider.repeating_characters:
+#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Generators\RepeatingCharactersGenerator
+#        arguments: [@faker.generator]
+#        tags:
+#            - { name: bazinga_faker.provider }
+#
+#    nolimits.spam_matcher.repeating:
+#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Matchers\RepeatingCharactersMatcher
+#        tags:
+#            - { name: nolimits.spam_matcher }
+#
+    nolimits.spam_classifier:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Classifier
+
+#    nolimits.file_ratings_repository:
+#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRatingRepository
+#        factory_service: doctrine.orm.default_entity_manager
+#        factory_method: getRepository
+#        arguments:
+#            - Nolimits\AppBundle\Entity\FileRating
+#
+#
+    nolimits.file_ratings_test_spam_command:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\SpamCommentsCommand
+        arguments:
+            - "@nolimits.spam_classifier"
+            - "@=service('doctrine').getRepository('AppBundle:FileRating')"
+        tags:
+            - { name: console.command }
+
+    coaster_styles:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\CoasterStyles
+
+    util.string:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Utils\StringUtil
+
+    util.coaster:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Utils\CoasterUtil
+        arguments:
+            - "@util.string"
+
+    util.screenshot:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Utils\ScreenshotUtil
+        arguments:
+            - "@util.string"
+
+    app.command.process_file_upload:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ProcessFileUploadCommand
+        arguments:
+            - "@upload_coaster_service"
+            - "@upload_screenshot_service"
+            - "@=service('doctrine').getRepository('AppBundle:File')"
+        tags:
+            -  { name: console.command }
+
+    upload_screenshot_service:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\UploadScreenshotService
+        arguments:
+            - "@util.screenshot"
+            - "@intervention"
+        calls:
+            - [setLogger, ["@logger"]]
+            - [setMountManager, ["@oneup_flysystem.mount_manager"]]
+
+
+    upload_coaster_service:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\UploadCoasterService
+        arguments:
+            - "@util.coaster"
+        calls:
+            - [setLogger, ["@logger"]]
+            - [setMountManager, ["@oneup_flysystem.mount_manager"]]
+
+    intervention:
+        class: Intervention\Image\ImageManager
+        arguments:
+            -
+                driver: "imagick"
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users
+    from_email:
+        address:     no-reply@nolimits-exchange.com
+        sender_name: Nolimits Exchange
+    registration:
+        confirmation:
+            enabled: true

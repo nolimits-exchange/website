@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ article.name }} - Nolimits Exchange{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            {{ render(controller('AppBundle:News:newsCategoriesPartial')) }}
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>{{ article.name }} - Page {{ pager.currentPage }}</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="news-pagination">
+                        {{ pagerfanta(pager, 'twitter_bootstrap3') }}
+                    </div>
+                <hr>
+                    <p id="description">{{ article.summary }}</p>
+                    <hr />
+                    {% for page in pages %}
+                        {{ page.content | raw }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

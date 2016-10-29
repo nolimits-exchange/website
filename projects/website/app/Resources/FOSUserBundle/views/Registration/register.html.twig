@@ -1,0 +1,22 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}Register - Nolimits Exchange{% endblock %}
+
+{% block fos_user_content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>Register</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                            {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock fos_user_content %}

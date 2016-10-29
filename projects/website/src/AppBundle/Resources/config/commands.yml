@@ -1,0 +1,8 @@
+services:
+
+    nolimits.commands.migrate_files:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\MigrateFilesCommand
+        arguments:
+            - "@oneup_flysystem.mount_manager"
+        tags:
+            - { name: console.command }

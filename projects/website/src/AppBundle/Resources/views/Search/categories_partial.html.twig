@@ -1,0 +1,45 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div class="panel panel-search">
+    <div class="panel-heading">
+        <h2>Filters</h2>
+    </div>
+
+    <div class="panel-body">
+        {{ form_start((form)) }}
+        <table class="table table-responsive table-coaster-meta table-search-form">
+            <tbody>
+
+            <tr>
+                <td>
+                {{
+                    form_widget(form.term, {
+                        'attr': {
+                            'class': 'input-lg',
+                            'placeholder': 'Search Term'
+                        }
+                    })
+                }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{
+                        form_widget(form.type, {
+                            'attr': {
+                                'class': 'text',
+                            }
+                        })
+                    }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form_widget(form.submit, { 'attr': { 'class': 'btn-primary btn-lg btn-block'} }) }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {{ form_end(form) }}
+    </div>
+</div>

@@ -1,0 +1,49 @@
+.table-search-form {
+  tbody {
+    tr {
+      td {
+        padding: 10px 0 !important;
+      }
+    }
+  }
+}
+
+.table-coaster-meta {
+  border-collapse: separate;
+  tbody {
+    tr:first-child {
+      td {
+        border-top: none;
+      }
+    }
+    tr:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+    tr {
+      td.padded {
+        padding: 8px 16px;
+      }
+
+      td {
+        padding: 0;
+        border-bottom: 1px solid #080808;
+        border-top: 1px solid #212121;
+
+        a {
+          display: block;
+          padding: 8px 16px;
+          
+          &.btn {
+            margin-bottom: 16px;
+          }
+          
+          .glyphicon {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}

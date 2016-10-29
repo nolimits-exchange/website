@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Faq:index{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>Frequently Asked Questions</h1>
+                </div>
+                <div class="panel-body">
+                    {% for question in questions %}
+                        <h2 id="{{ question.question | slugify }}">{{ question.question }} <a href="#{{ question.question | slugify }}">#</a></h2>
+                        {{ question.answer | raw }}
+                        <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

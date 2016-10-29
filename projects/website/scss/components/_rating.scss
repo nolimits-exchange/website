@@ -1,0 +1,155 @@
+.rating {
+  
+  .rating-text {
+    word-break: break-all;
+    padding: 15px;
+  }
+  
+  .comment {
+    background:#33322E;
+    border-top:1px solid #403e39;
+    border-bottom:1px solid #262522;
+    
+  }
+
+  .collapsed {
+    display: none;
+    visibility: hidden;
+  }
+
+  .header {
+    background:#262522;
+    border-bottom: 1px solid #191917;
+    border-top: 1px solid #33322D;
+    margin:0;
+    padding:15px;
+  }
+
+  .toggle a:hover {
+    background:#8F0E17;
+    text-decoration:none;
+  }
+
+  /*Rating info box*/
+  .info {
+    float:right;
+    margin: 15px;
+  }
+
+  .tech, .adren, .orig {
+    background:#8f0e17;
+    float:left;
+    margin:0 5px;
+    width:60px;
+  }
+
+  .tech {
+    margin-left:0;
+  }
+
+  /*Score in red*/
+  .tech p, .adren p, .orig p {
+    color:#fff;
+    margin:0;
+    padding:10px;
+    text-align:center;
+  }
+
+  .tech .label, .adren .label, .orig .label {
+    background:#262522;
+    margin:0;
+    display: block;
+    border-radius: 0;
+  }
+  .vote {
+    display:inline-block;
+    vertical-align:middle;
+    width:35px;
+    height:33px;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+
+  .vote.up {
+    background: image-url("smile32.png") no-repeat center 1px;
+  }
+
+  .vote.down {
+    background: image-url("frown32.png") no-repeat center 1px;
+  }
+
+  .selected.up {
+    background-color:#1fc213;
+  }
+
+  .selected.down {
+    background-color:#c2131f;
+  }
+
+  #form {
+    margin-bottom:20px;
+  }
+
+  #rating-form {
+    padding-bottom:0;
+    margin-bottom:20px;
+  }
+
+  #rating-form form {
+    overflow:auto;
+    float:left;
+    width:638px;
+  }
+
+  #rating-form p {
+    margin-top:0;
+  }
+
+  #technical, #adrenaline, #originality {
+    float:left;
+    margin-right:19px;
+  }
+
+  #originality {
+    margin-right:0;
+  }
+
+  #comment {
+    float:left;
+  }
+
+  #comment textarea {
+    width:620px;
+    height:150px;
+  }
+
+  #technical select, #adrenaline select, #originality select {
+    width:200px;
+  }
+
+  #submit {
+    clear:left;
+  }
+
+  #help {
+    float:left;
+    margin-left:18px;
+    width:265px;
+  }
+
+  #help h3 {
+    margin-top:0.35em;
+  }
+
+  #ratings .report {
+    color:white;
+    cursor: pointer;
+  }
+
+  #ratings .report:hover {
+    text-decoration: underline;
+  }
+
+
+}

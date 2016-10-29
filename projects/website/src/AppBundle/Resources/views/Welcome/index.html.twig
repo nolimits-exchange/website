@@ -1,0 +1,86 @@
+{% extends "::base.html.twig" %}
+
+{% import _self as welcome %}
+
+{% block title %}Nolimits Exchange - A Nolimits Coaster Community{% endblock %}
+
+{% macro coasters(title, files, show_ratings, medals) %}
+<div class="panel panel-home">
+    <div class="panel-heading">
+        <h2>{{ title }}</h2>
+    </div>
+    <div class="panel-body">
+        {% if files %}
+            {% set first = files | first %}
+            <a href="{{ path('coaster', {id: first.id, slug: first.name | slugify}) }}" title="{{ first.name }}" class="screenshot">
+                <img class="img-responsive home-screenshot" src="{{ asset(screenshot_path(first.id, first.screenshotExt, 'large'), 'screenshots') }}" />
+            </a>
+            <table class="table table-condensed table-responsive table-coasters">
+                {% for file in files %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('coaster', {id: file.id, slug: file.name | slugify }) }}" title="{{ file.name }}">
+                                <h4 class="coaster-name">{{ file.name | truncate(25, false, '…') }}</h4>
+                                <p class="author">{{ file.author.username }}</p>
+                            </a>
+                        </td>
+                        {% if show_ratings %}
+                            <td class="rating {% if medals %}rating-medal {% endif %}text-center">
+                                {% if medals and loop.index <= 3 %}
+                                    <img src="{{ asset('/img/medal_' ~ loop.index ~ '.png') }}">
+                                {% else %}
+                                    {{ file.rating }}
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <div class="nothing-to-show">
+                Nothing to show
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 news">
+                    <div class="panel panel-home">
+                        <div class="panel-heading">
+                            <h2>News</h2>
+                        </div>
+                        <div class="panel-body">
+                            {% for article in articles %}
+                            <a href="{{ path('news_article', {id: article.id, slug: article.url}) }}" title="{{ article.name }}">
+                                <article>
+                                    <h3 class="header">{{ article.name | truncate(25, false, '…')}}</h3>
+                                    <p class="summary">{{ article.summary }}</p>
+                                </article>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    {{ welcome.coasters('Newest', files.newest, true, false) }}
+                    {{ welcome.coasters('Best this month', files.highest.month, true, true) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ welcome.coasters('Best this week', files.highest.week, true, true) }}
+                    {{ welcome.coasters('Best this year', files.highest.year, true, true) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

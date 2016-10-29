@@ -1,0 +1,68 @@
+.table-coasters {
+  thead {
+    tr {
+      th {
+        @include gradient-vertical(#59564f, #403d39);
+        border-bottom: 1px solid #4c4944;
+        font-size: $font-size-h4;
+        font-weight: bold;
+        color: #fff;
+        margin: 0;
+        padding: 0.5em 1em;
+        line-height: 1.1;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        padding: 1em;
+        border: 0;
+        @include gradient-vertical(#32332E, #272622);
+        
+        .coaster-name {
+          color: #fff;
+          margin: 0;
+        }
+        
+        .author {
+          color: #615F59;
+          margin: 0;
+        }
+      }
+
+      td.coaster-screenshot {
+        width: 1px;
+        padding-right: 0;
+      }
+
+      td.rating.rating-medal {
+        padding-top: 13px;
+        padding-bottom: 13px;
+      }
+
+      td.rating {
+        @include gradient-horizontal(#272622, #33322E, 0%, 30%);
+        padding: 22px 1em;
+        color: #B2B2B2;
+        width: 90px;
+
+        span {
+          color: #615F59;
+          margin-left: 2px;
+        }
+      }
+
+      td.coaster-style,
+      td.coaster-downloads
+      {
+        padding: 0;
+
+        a, span {
+          padding: 22px 1em;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

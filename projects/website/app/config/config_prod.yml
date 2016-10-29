@@ -1,0 +1,8 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    assets:
+        packages:
+            screenshots:
+                base_url: "https://%object_storage_host%/images"

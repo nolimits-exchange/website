@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Search - Nolimits Exchange{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            {{ render(controller('AppBundle:Search:searchCategoriesPartial', { request: app.request })) }}
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-search panel-page">
+                <div class="panel-heading">
+                    <h1>Search</h1>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-responsive table-coasters">
+                        <thead>
+                        <tr>
+                            <th colspan="2"></th>
+                            <th>Style</th>
+                            <th><a href="{{ path('search', app.request.query | merge({ 'downloads_sort': form.vars.value.downloadsSortInverse | default('desc'), 'ratings_sort': '' })) }}">Downloads</a></th>
+                            <th><a href="{{ path('search', app.request.query | merge({ 'ratings_sort': form.vars.value.ratingsSortInverse | default('desc'), 'downloads_sort': '' })) }}">Rating</a></th>
+                        </tr>
+                        </thead>
+                        {% for file in files %}
+                            <tr>
+                                <td class="coaster-screenshot">
+                                    <img src="{{ asset(screenshot_path(file.id, file.screenshotExt, 'thumbnail'), 'screenshots') }}" alt="{{ file.name | e('html_attr') }}">
+                                </td>
+                                <td>
+                                    <a href="{{ url('coaster', {id: file.id, slug: file.name | slugify}) }}" title="{{ file.name }}">
+                                        <h4 class="coaster-name">{{ file.name }}</h4>
+                                        <p class="author">{{ file.userUsername}}</p>
+                                    </a>
+                                </td>
+                                <td class="coaster-style">
+                                    <a href="{{ path('search', app.request.query | merge({ type: file.styleId })) }}">{{ file.styleName }}</a>
+                                </td>
+                                <td class="coaster-downloads">
+                                    <span>{{ file.downloads | number_format }}</span>
+                                </td>
+                                <td class="rating text-center">
+                                    {{ file.rating | number_format(2) }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            No results.
+                        {% endfor %}
+                    </table>
+                    <div class="news-pagination">
+                        {{ pagerfanta(pager, 'twitter_bootstrap3') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

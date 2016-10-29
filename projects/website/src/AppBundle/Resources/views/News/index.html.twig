@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ category.name }} News - Nolimits Exchange{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            {{ render(controller('AppBundle:News:newsCategoriesPartial')) }}
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>{{ category.name }} News - Page {{ pager.currentPage }}</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="news-pagination">
+                        {{ pagerfanta(pager, 'twitter_bootstrap3') }}
+                    </div>
+                    <hr>
+                    {% if articles | length > 0 %}
+                        {% for column in articles|batch(articles | length / 2)  %}
+                        <div class="col-md-6">
+                            {% for article in column %}
+                            <h2><a href="{{ path('news_article', { 'slug': article.url, 'id': article.id })}}">{{ article.name }}</a></h2>
+                            <p>{{ article.summary}}</p>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No articles found</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

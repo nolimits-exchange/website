@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "backbone": "^1.2.3",
+    "bootstrap-fileinput": "^4.3.3",
+    "bootstrap-sass": "^3.3.5",
+    "bootstrap-slider": "^7.1.0",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-sass": "^2.0.4",
+    "jquery": "^2.1.4",
+    "jquery-ui": "^1.10.5",
+    "markdown-it": "^5.0.1",
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

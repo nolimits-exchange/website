@@ -1,0 +1,40 @@
+{% block body %}
+    {% if not coaster.ratings.empty %}
+        {% for rating in coaster.ratings %}
+            <div class="rating">
+                <p id="{{ rating.id }}" class="header">
+                    <span class="username">{{ rating.user.username }}</span>
+                    <span class="time">{{ rating.dateAdded | time_diff }}</span>
+                </p>
+                <div id="comment-{{ rating.id }}" class="comment clearfix">
+                    <div class="info">
+                        <div class="tech">
+                            <p>{{ rating.technical }}</p>
+                            <p class="label">Tech</p>
+                        </div>
+                        <div class="adren">
+                            <p>{{ rating.adrenaline }}</p>
+                            <p class="label">Adren</p>
+                        </div>
+                        <div class="orig">
+                            <p>{{ rating.originality }}</p>
+                            <p class="label">Orig</p>
+                        </div>
+                    </div>
+                    <div class="rating-text">
+                        {{ rating.comment }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="rating">
+            <div class="comment clearfix">
+                <div class="rating-text">
+                    <p>No one has rated this coaster :(</p>
+                    <p>You could be the first to experience the greatest roller coaster ever made!</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

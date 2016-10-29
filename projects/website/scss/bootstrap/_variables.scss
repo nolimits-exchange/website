@@ -1,0 +1,79 @@
+// General options
+
+// Colours
+$body-bg: #000;
+$text-color: #B2B2B2;
+$table-border-color: transparent;
+$input-bg: #57554F;
+$input-color: #fff;
+$input-border: #63615a;
+$input-border-radius: 3px;
+$input-border-radius-large: 3px;
+$input-border-radius-small: 3px;
+
+$nav-link-hover-bg: none;
+
+$navbar-default-toggle-hover-bg:           none !default;
+$navbar-default-toggle-icon-bar-bg:        #fff !default;
+$navbar-default-toggle-border-color:       none !default;
+$navbar-default-border:                    none !default;
+
+$navbar-default-color:                     #fff !default;
+$navbar-default-link-color:                #B2B2B2 !default;
+$navbar-default-link-hover-color:          #fff !default;
+$navbar-default-link-hover-bg:             transparent !default;
+
+$navbar-padding-vertical: 25px;
+
+$link-color: #fff;
+
+$pager-bg:             #4D4C48 !default;
+$pager-border:         #595854 !default;
+$pager-border-radius:  10px !default;
+$pager-hover-bg:       none !default;
+$pager-active-color:   #fff !default;
+
+// Font sizes
+$font-size-base: 13px;
+
+// Navbar
+$navbar-border-radius: 0;
+
+// Panel
+$panel-bg: inherit;
+$panel-body-padding: 0;
+$panel-heading-padding: 0;
+$panel-footer-padding: 0;
+$panel-border-radius: 0;
+$panel-inner-border: 0;
+$panel-footer-bg: inherit;
+
+// Buttons
+$btn-border-radius-base: 3px;
+$btn-border-radius-large: 3px;
+$btn-border-radius-small:  3px;
+
+// Pagination
+$pagination-color:                     $link-color !default;
+$pagination-bg:                        #9E0D1A !default;
+$pagination-border: #9E0D1A !default;
+
+$pagination-hover-color:               #262522 !default;
+$pagination-hover-bg:                  #fff !default;
+$pagination-hover-border:              #fff !default;
+
+$pagination-active-color:        #9E0D1A !default;
+$pagination-active-bg:                 #640B11 !default;
+$pagination-active-border:             #9E0D1A !default;
+
+$pagination-disabled-color: #3c3a36 !default;
+$pagination-disabled-bg:               #262522 !default;
+$pagination-disabled-border:           #262522 !default;
+
+
+$icon-font-path: '/fonts/bootstrap/';
+
+.main {
+  background: #151515;
+  padding-top: 18px;
+}

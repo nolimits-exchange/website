@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Terms and Conditions - Nolimits Exchange{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>Terms &amp; Conditions</h1>
+                </div>
+                <div class="panel-body">
+                    <p>Welcome to our website. If you continue to browse and use this website you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern Nolimits-Exchange.com’s relationship with you in relation to this website.</p>
+                    <p>The term ‘Nolimits-Exchange.com’ or ‘us’ or ‘we’ refers to the owner of the website. The term ‘you’ refers to the user or viewer of our website.</p>
+                    <p>The use of this website is subject to the following terms of use:</p>
+                    <ol>
+                        <li>The content of the pages of this website is for your general information and use only. It is subject to change without notice.</li>
+                        <li>Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.</li>
+                        <li>Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.</li>
+                        <li>This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.</li>
+                        <li>All trademarks reproduced in this website, which are not the property of, or licensed to the operator, are acknowledged on the website.</li>
+                        <li>Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.</li>
+                        <li>From time to time this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).</li>
+                        <li>Your use of this website and any dispute arising out of such use of the website is subject to the laws of England, Scotland and Wales.</li>
+                    </ol>
+                    <h2>Exchange</h2>
+                    <ol>
+                        <li>Coasters and screenshots must be your own creations. Copyright infringement is not tolerated and will result in your account and its related data being removed
+                            from the website.</li>
+                        <li>Coasters which contain offensive language in the name or description will be removed from the website without notice.</li>
+                        <li>Screenshots must relate to the coaster file. Anything else is disallowed and will result in your coaster being disabled.
+                        </li>
+                        <li>Disabled accounts are fully removed from the website 14 days after the account was last disabled.</li>
+                    </ol>
+                    <h2>Accounts</h2>
+                    <ol>
+                        <li>Each person must have one account only. If we see you have more than one
+                            account then all accounts will be disabled without warning. For situations
+                            where multiple users are under the same IP address then please <a href="{{ path('contact') }}">contact us</a>.
+                        </li>
+                        <li>Usernames which contain offensive language will have their account and related content removed from the website without notice.</li>
+                        <li>Each account requires a valid email address. This is used to logon, activate your account and reset your password.</li>
+                    </ol>
+                    <h2>Email</h2>
+                    <ol>
+                        <li>Nolimits-Exchange does not send out email other than for account activation
+                            and forgotten passwords. If you have email claiming to be from Nolimits-Exchange
+                            then please <a href="{{ path('contact') }}">contact us</a> so we can look into it.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

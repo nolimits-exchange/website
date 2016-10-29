@@ -1,0 +1,94 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ coaster.name }} by {{ coaster.author.username }} - Nolimits Exchange{% endblock %}
+
+{% form_theme ratingForm 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>{{ coaster.name }}</h1>
+                </div>
+                <div class="panel-screenshot">
+                    <img class="img-responsive screenshot" src="{{ asset(screenshot_path(coaster.id, coaster.screenshotExt, 'large'), 'screenshots') }}" title="{{ coaster.name | e('html_attr') }}">
+                </div>
+                <div class="panel-body">
+                    <div id="description">
+                        {{ coaster.description | markdown }}
+                    </div>
+                </div>
+            </div>
+
+            {% if app.user and not rated %}
+                <div class="panel panel-page">
+                    <div class="panel-heading">
+                        <h2>Submit a rating</h2>
+                    </div>
+                    <div class="panel-body rating" id="rating-form">
+                        <div class="row">
+                            {{ form_start(ratingForm) }}
+                            {{ form_errors(ratingForm) }}
+                            <div class="col-sm-4">
+                                {{ form_row(ratingForm.technical) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_row(ratingForm.adrenaline) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_row(ratingForm.originality) }}
+                            </div>
+                            <div class="col-md-12">
+                                {{ form_row(ratingForm.comment) }}
+                                {{ form_row(ratingForm.rate, { 'attr': { 'class': 'btn-primary btn-lg pull-right'} }) }}
+                                {{ form_end(ratingForm) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h2>Ratings</h2>
+                </div>
+                {{ include('AppBundle:Coaster:ratings.html.twig') }}
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-sidebar">
+                <div class="panel-heading">
+                    <h2>Score</h2>
+                </div>
+                <div class="panel-body">
+                    <h3 class="text-center">{{ coaster.rating }}<small> / 10</small></h3>
+                </div>
+            </div>
+
+            <table class="table table-responsive table-coaster-meta">
+                <tbody>
+                <tr>
+                    <td><a href="{{ path('coaster_download', { id: coaster.id, slug: coaster.name | slugify })}}" class="btn btn-success btn-large"><span class="glyphicon glyphicon-download"></span>Download</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{{ url('search') }}?type={{ coaster.style.id | e('html_attr') }}">{{ coaster.style.name }}</a></td>
+                </tr>
+                <tr>
+                    <td class="padded"><strong>Author: </strong> {{ coaster.author.username }}</td>
+                </tr>
+                <tr>
+                    <td class="padded"><strong>Uploaded: </strong>{{ coaster.dateAdded | time_diff }}</td>
+                </tr>
+                <tr>
+                    <td class="padded"><strong>Ratings: </strong>{{ coaster.ratings.count | number_format}}</td>
+                </tr>
+                <tr>
+                    <td class="padded"><strong>Downloads: </strong>{{ coaster.downloads | number_format }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

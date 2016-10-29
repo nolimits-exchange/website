@@ -1,0 +1,75 @@
+imports:
+    - { resource: commands.yml }
+
+services:
+
+    app.doctrine.rating_cache_listener:
+      class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\RatingCacheListener
+      tags:
+          - { name: doctrine.event_listener, event: postPersist }
+
+    app.doctrine.download_cache_listener:
+      class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\DownloadCacheListener
+      tags:
+          - { name: doctrine.event_listener, event: postPersist }
+
+    app.file_uploader:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\FileUploader
+        arguments:
+            - "@oneup_flysystem.ephemeral_filesystem"
+
+    fos_user.user_provider.email:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Security\EmailProvider
+        public: false
+        arguments:
+            - "@fos_user.user_manager"
+
+    app.screenshot_extension:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Twig\ScreenshotExtension
+        public: false
+        arguments:
+            - "@util.screenshot"
+        tags:
+            - { name: twig.extension }
+
+    app.text_extension:
+        class: Twig_Extensions_Extension_Text
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.date_extension:
+        class: Twig_Extensions_Extension_Date
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.password_resetting:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\PasswordResettingListener
+        arguments:
+            - "@router"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    flysystem.s3_client:
+        class: Aws\S3\S3Client
+        factory: [Aws\S3\S3Client, factory]
+        arguments:
+            -
+                credentials:
+                    key:    "%object_storage_key%"
+                    secret: "%object_storage_secret%"
+                version:  "latest"
+                region:   "%object_storage_region%"
+                endpoint: "https://%object_storage_server%"
+
+    flysystem.s3_client_former:
+        class: Aws\S3\S3Client
+        factory: [Aws\S3\S3Client, factory]
+        arguments:
+            -
+                credentials:
+                    key:    "%former_object_storage_key%"
+                    secret: "%former_object_storage_secret%"
+                version:  "latest"
+                region:   "%former_object_storage_region%"

@@ -1,0 +1,43 @@
+.navbar {
+  background-image: url('/img/background.jpg');
+  background-size: cover;
+  border-bottom: 1px solid #212121;
+  margin-top: 0;
+
+  li {
+    padding: 0;
+    float: left;
+  }
+
+  a {
+    color: inherit;
+    display: inline-block;
+    padding: 0 2em;
+  }
+}
+
+.navbar .nav > li > a {
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: $screen-sm-min) {
+
+  .navbar-static-top > .container > .navbar-collapse {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .navbar {
+    li {
+      float: none;
+    }
+  }
+}

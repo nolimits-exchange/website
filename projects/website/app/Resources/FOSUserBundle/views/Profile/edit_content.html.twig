@@ -1,0 +1,14 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<p><strong>Note</strong>: Public profiles are coming back soon, keep an eye on the news.</p>
+
+<hr>
+
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+{{ form_row(form.username, {'attr': { 'class': 'input-lg'}}) }}
+{{ form_row(form.email, {'attr': { 'class': 'input-lg'}}) }}
+{{ form_row(form.current_password, {'attr': { 'class': 'input-lg'}}) }}
+<input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-primary btn-lg btn-block"/>
+{{ form_end(form) }}

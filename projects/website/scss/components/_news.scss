@@ -1,0 +1,25 @@
+.news {
+  a {
+    color: inherit;
+  }
+  .header {
+    color: #fff;
+    padding: 0.5em;
+    margin: 0;
+    border-top: 1px solid #59574F;
+    border-bottom: 1px solid #191916;
+    background: #272622;
+  }
+  .summary {
+    padding: 1em;
+    border-top: 1px solid #403E39;
+    border-bottom: 1px solid #4C4B44;
+    background: #33322E;
+  }
+}
+
+.panel-news {
+  p {
+    width: 300px;
+  }
+}

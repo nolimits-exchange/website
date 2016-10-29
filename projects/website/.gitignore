@@ -1,0 +1,17 @@
+/vendor/
+/public/bundles
+/public/fonts
+/public/css
+/public/js
+/.sass-cache/
+/node_modules
+.env
+.secrets.json
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/tmp/.gitkeep
+var/cache
+var/logs
+var/tmp
+/phpunit.xml
+.DS_Store

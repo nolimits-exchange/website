@@ -1,0 +1,20 @@
+<div class="panel panel-search">
+    <div class="panel-heading">
+        <h2>Categories</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table table-responsive table-coaster-meta">
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    {% if category.url is empty %}
+                        <td><a href="{{ path('news') }}">{{ category.name }}</a></td>
+                    {% else %}
+                        <td><a href="{{ path('news_category', { 'category': category.url}) }}">{{ category.name }}</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

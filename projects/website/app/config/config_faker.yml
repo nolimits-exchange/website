@@ -1,0 +1,16 @@
+services:
+  faker.provider.markdown:
+    class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Faker\Provider\MarkdownProvider
+    arguments:
+      - "@faker.generator"
+    tags:
+      - { name: bazinga_faker.provider }
+
+  faker.provider.password:
+    class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Faker\Provider\PasswordProvider
+    arguments:
+      - "@faker.generator"
+    calls:
+      - [setEncoderFactory, ['@security.encoder_factory']]
+    tags:
+      - { name: bazinga_faker.provider }

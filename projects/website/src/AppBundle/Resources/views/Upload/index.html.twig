@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Upload a Coaster - Nolimits Exchange{% endblock %}
+
+{% form_theme form with [_self, 'bootstrap_3_layout.html.twig'] %}
+
+{% block _upload_coaster_widget %}
+    <input type="file" id="upload_coaster" name="upload[coaster]" required="required" data-show-preview="false" data-show-upload="false" data-allowed-file-extensions='["nl2pkg"]'/>
+{% endblock %}
+
+{% block _upload_screenshot_widget %}
+    <input type="file" id="upload_screenshot" name="upload[screenshot]" required="required" data-show-preview="false" data-show-upload="false" data-allowed-file-types='["image"]'/>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>Upload Your Coaster</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                            {{ form_start(form, { 'attr': { 'id': 'upload-form'}}) }}
+                            {{ form_errors(form) }}
+
+                            {{ form_row(form.name, { 'attr': { 'class': 'input-lg'}}) }}
+                            {{ form_row(form.description, { 'attr': { 'rows': '3'}}) }}
+
+                            {{ form_row(form.coaster) }}
+                            {{ form_row(form.screenshot) }}
+                            {{ form_row(form.upload, { 'attr': { 'class': 'btn-primary btn-lg pull-right'} }) }}
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
