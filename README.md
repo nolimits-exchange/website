@@ -44,13 +44,20 @@ Running the website
     ``` bash
     docker-compose up -d
     ```
-3. Load Fixtures
+
+3. Install dependencies
+
+   ``` bash
+   ./bin/composer install
+   ```
+
+4. Load Fixtures
 
     ``` bash
     ./bin/fixtures
     ```
 
-4. Start the worker
+5. Start the worker
 
     ``` bash
     ./bin/worker
