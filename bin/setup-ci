@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+./docker/composer install --no-interaction --no-ansi \
+    && ./docker/console doctrine:migrations:migrate -n \
+    && ./docker/console doctrine:fixtures:load -n --append

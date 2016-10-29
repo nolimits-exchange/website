@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+args="bin/console $@"
+
+docker-compose exec web sh -c "$args"
