@@ -24,7 +24,7 @@ services:
         ports:
             - "13306:3306"
         volumes:
-            - ./resources/db/base.sql:/docker-entrypoint-initdb.d/base.sql
+            - ./db/base.sql:/docker-entrypoint-initdb.d/base.sql
         environment:
             MYSQL_ROOT_PASSWORD: "nolimits"
             MYSQL_DATABASE: "nolimits"
