@@ -1,0 +1,37 @@
+version: "2"
+
+services:
+    web:
+        volumes:
+            - ~/.composer/auth.json:/var/www/composer/auth.json
+            - ./projects/website:/var/www/nolimits
+        environment:
+            VIRTUAL_HOST: "nolimits.docker"
+        extra_hosts:
+            - "dockerhost:$DOCKERHOST"
+        links:
+            - db
+
+    worker:
+        command: ./bin/console jobqueue:listen
+        volumes_from:
+            - web
+        links:
+            - db
+
+    blackfire:
+        image: blackfire/blackfire
+        environment:
+            - BLACKFIRE_SERVER_ID
+            - BLACKFIRE_SERVER_TOKEN
+
+    db:
+        ports:
+            - "13306:3306"
+        volumes:
+            - ./db/base.sql:/docker-entrypoint-initdb.d/base.sql
+        environment:
+            MYSQL_ROOT_PASSWORD: "nolimits"
+            MYSQL_DATABASE: "nolimits"
+            MYSQL_USER: "nolimits"
+            MYSQL_PASSWORD: "nolimits"
