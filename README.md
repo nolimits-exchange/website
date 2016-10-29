@@ -2,6 +2,10 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
+A [nolimits coaster](http://www.nolimitscoaster.com/) community website.
+
+![](http://i.imgur.com/hIf88dW.png)
+
 Development environment powered by Docker.
 
 Machine Setup
