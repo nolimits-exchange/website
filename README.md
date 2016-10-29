@@ -1,6 +1,7 @@
 # NolimitsExchange\website
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+[![Build Status](https://semaphoreci.com/api/v1/thepixeldeveloper/website/branches/master/shields_badge.svg)](https://semaphoreci.com/thepixeldeveloper/website)
 
 A [nolimits coaster](http://www.nolimitscoaster.com/) community website.
 
