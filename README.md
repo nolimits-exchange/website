@@ -17,41 +17,46 @@ Requirements:
 
 - [Homebrew](http://brew.sh/)
 
-**1. Install Docker dependencies**
+1. Install Docker dependencies
 
-```bash
-brew tap codekitchen/dinghy
-brew install dinghy docker docker-machine docker-machine-driver-xhyve
-```
+    ```bash
+    brew tap codekitchen/dinghy
+    brew install dinghy docker docker-machine docker-machine-driver-xhyve
+    ```
 
-**2. Create a virtual machine to run our containers on.**
+2. Create a virtual machine to run our containers on.
 
-```bash
-dinghy create --provider xhyve
-```
+    ```bash
+    dinghy create --provider xhyve
+    ```
 
 Running the website
 -----
 
-Download the website in the projects directory:
+1. Enable xdebug support
 
-``` bash
-git clone https://github.com/nolimits-exchange/website projects/website
-```
+    ``` bash
+    source ./scripts/bootstrap-xdebug.sh
+    ```
 
-If you need Xdebug support (we recommend you do)
+2. Bring up the development stack
 
-``` bash
-source ./scripts/bootstrap-xdebug.sh
-```
+    ``` bash
+    docker-compose up -d
+    ```
+3. Load Fixtures
 
-Then boot up the application
+    ``` bash
+    ./bin/fixtures
+    ```
 
-``` bash
-docker-compose up -d
-```
+4. Start the worker
 
-and visit http://nolimits.docker
+    ``` bash
+    ./bin/worker
+    ```
+
+Visit http://nolimits.docker
 
 Custom Images
 -----
