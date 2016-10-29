@@ -1,4 +1,4 @@
-# NolimitsExchange\development-stack
+# NolimitsExchange\website
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
