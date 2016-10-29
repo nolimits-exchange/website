@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+./bin/composer install --no-interaction \
+    && ./bin/console doctrine:migrations:migrate -n \
+    && ./bin/console doctrine:fixtures:load -n --append
