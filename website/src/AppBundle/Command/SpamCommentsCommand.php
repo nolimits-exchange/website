@@ -4,6 +4,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Command;
 
 use Doctrine\ORM\EntityRepository;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRatingRepository;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\ClassifierInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -19,7 +20,7 @@ class SpamCommentsCommand extends Command
     protected $classifier;
     
     /**
-     * @var EntityRepository
+     * @var FileRatingRepository
      */
     protected $fileRatingsRepository;
 
@@ -47,9 +48,6 @@ class SpamCommentsCommand extends Command
     {
         $limit = 41000;
         
-        /**
-         * @var FileRating[] $publicRatings
-         */
         $publicRatings = $this->fileRatingsRepository->findRatingsToSpamProcess($limit);
         $publicRatingsIterator = $publicRatings->iterate();
         
