@@ -2,6 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 [![Build Status](https://semaphoreci.com/api/v1/thepixeldeveloper/website/branches/master/shields_badge.svg)](https://semaphoreci.com/thepixeldeveloper/website)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nolimits-exchange/website/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nolimits-exchange/website/?branch=master)
 
 A [nolimits coaster](http://www.nolimitscoaster.com/) community website.
 
