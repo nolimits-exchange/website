@@ -3,9 +3,6 @@
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Search;
 
 /**
  * SearchTypesRepository

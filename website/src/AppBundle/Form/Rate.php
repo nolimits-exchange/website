@@ -2,7 +2,6 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Form;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

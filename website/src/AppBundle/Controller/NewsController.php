@@ -3,13 +3,11 @@
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Exception;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\News;
 
 class NewsController extends Controller

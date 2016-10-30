@@ -2,11 +2,9 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository;
 
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Search;
 
 class FileRepository extends EntityRepository implements SaveableInterface
 {
