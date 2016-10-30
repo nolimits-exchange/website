@@ -412,8 +412,9 @@ class File
         $this->style = $style;
     }
     
+    
     /**
-     * @return PersistentCollection
+     * @return ArrayCollection
      */
     public function getDownloadLog()
     {
@@ -472,5 +473,13 @@ class File
                 )
             )
             ->count();
+    }
+    
+    /**
+     * @return Collection
+     */
+    public function getUserFavourites()
+    {
+        return $this->userFavourites;
     }
 }
