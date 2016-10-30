@@ -28,3 +28,10 @@ services:
     db:
         ports:
             - 13306:3306
+
+    pma:
+        image: phpmyadmin/phpmyadmin:latest
+        links:
+            - db
+        environment:
+           VIRTUAL_HOST: db.nolimits.docker

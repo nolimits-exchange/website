@@ -68,7 +68,7 @@ Running the website
 Visit http://nolimits.docker and
 
 * http://mail.nolimits.docker for emails.
-
+* http://db.nolimits.docker for database management.
 
 Custom Images
 -----
