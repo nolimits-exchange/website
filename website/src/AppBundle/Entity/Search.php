@@ -5,17 +5,15 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Search
+ * Class Search.
  *
  * @ORM\Table(name="search")
  * @ORM\Entity(readOnly=true, repositoryClass="Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\SearchRepository")
- *
- * @package Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity
  */
 class Search
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", length=8, nullable=false)
@@ -23,7 +21,7 @@ class Search
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="status", type="integer", length=1, nullable=false)
      */
@@ -44,14 +42,14 @@ class Search
     protected $rating;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="downloads", type="integer", length=8, nullable=false)
      */
     protected $downloads;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="user_id", type="integer", length=11, nullable=false)
      */
@@ -65,7 +63,7 @@ class Search
     protected $userUsername;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="style_id", type="integer", length=8, nullable=false)
      */

@@ -5,7 +5,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * NewsContents
+ * NewsContents.
  *
  * @ORM\Table(name="news_contents", indexes={@ORM\Index(name="IDX_FDC4B226B5A459A0", columns={"news_id"})})
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class NewsContents
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,7 +29,7 @@ class NewsContents
     private $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="`order`", type="integer", nullable=false)
      */
@@ -51,9 +51,9 @@ class NewsContents
     private $article;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -61,9 +61,10 @@ class NewsContents
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string       $name
+     * @param string $name
+     *
      * @return NewsContents
      */
     public function setName($name)
@@ -74,7 +75,7 @@ class NewsContents
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -84,9 +85,10 @@ class NewsContents
     }
 
     /**
-     * Set order
+     * Set order.
      *
-     * @param  integer      $order
+     * @param int $order
+     *
      * @return NewsContents
      */
     public function setOrder($order)
@@ -97,9 +99,9 @@ class NewsContents
     }
 
     /**
-     * Get order
+     * Get order.
      *
-     * @return integer
+     * @return int
      */
     public function getOrder()
     {
@@ -107,9 +109,10 @@ class NewsContents
     }
 
     /**
-     * Set content
+     * Set content.
      *
-     * @param  string       $content
+     * @param string $content
+     *
      * @return NewsContents
      */
     public function setContent($content)
@@ -120,7 +123,7 @@ class NewsContents
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -130,9 +133,10 @@ class NewsContents
     }
 
     /**
-     * Set news
+     * Set news.
      *
-     * @param  \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\News $news
+     * @param \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\News $news
+     *
      * @return NewsContents
      */
     public function setArticle(\Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\News $news = null)
@@ -143,7 +147,7 @@ class NewsContents
     }
 
     /**
-     * Get news
+     * Get news.
      *
      * @return \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\News
      */

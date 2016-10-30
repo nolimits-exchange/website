@@ -8,7 +8,7 @@ use Doctrine\ORM\PersistentCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * NewsCategories
+ * NewsCategories.
  *
  * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="news_categories", indexes={@ORM\Index(name="level", columns={"lvl"}), @ORM\Index(name="url", columns={"url"}), @ORM\Index(name="enabled", columns={"enabled"})})
@@ -17,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class NewsCategory
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -40,7 +40,7 @@ class NewsCategory
     private $url;
 
     /**
-     * @var integer
+     * @var int
      *
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer", nullable=false)
@@ -48,7 +48,7 @@ class NewsCategory
     private $lft;
 
     /**
-     * @var integer
+     * @var int
      *
      * @Gedmo\TreeRight
      * @ORM\Column(name="rgt", type="integer", nullable=false)
@@ -56,7 +56,7 @@ class NewsCategory
     private $rgt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @Gedmo\TreeLevel
      * @ORM\Column(name="lvl", type="integer", nullable=false)
@@ -64,14 +64,14 @@ class NewsCategory
     private $lvl;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
     private $enabled;
 
     /**
-     * @var integer
+     * @var int
      *
      * @Gedmo\TreeRoot
      * @ORM\Column(name="scope", type="integer", nullable=false)
@@ -108,9 +108,9 @@ class NewsCategory
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -118,9 +118,10 @@ class NewsCategory
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string       $name
+     * @param string $name
+     *
      * @return NewsCategory
      */
     public function setName($name)
@@ -131,7 +132,7 @@ class NewsCategory
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -141,9 +142,10 @@ class NewsCategory
     }
 
     /**
-     * Set url
+     * Set url.
      *
-     * @param  string       $url
+     * @param string $url
+     *
      * @return NewsCategory
      */
     public function setUrl($url)
@@ -154,7 +156,7 @@ class NewsCategory
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -164,9 +166,10 @@ class NewsCategory
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param  boolean      $enabled
+     * @param bool $enabled
+     *
      * @return NewsCategory
      */
     public function setEnabled($enabled)
@@ -177,9 +180,9 @@ class NewsCategory
     }
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnabled()
     {
@@ -187,9 +190,10 @@ class NewsCategory
     }
 
     /**
-     * Set scope
+     * Set scope.
      *
-     * @param  integer      $scope
+     * @param int $scope
+     *
      * @return NewsCategory
      */
     public function setScope($scope)
@@ -200,9 +204,9 @@ class NewsCategory
     }
 
     /**
-     * Get scope
+     * Get scope.
      *
-     * @return integer
+     * @return int
      */
     public function getScope()
     {
@@ -210,9 +214,10 @@ class NewsCategory
     }
 
     /**
-     * Set parent
+     * Set parent.
      *
-     * @param  NewsCategory $parent
+     * @param NewsCategory $parent
+     *
      * @return NewsCategory
      */
     public function setParent(NewsCategory $parent = null)
@@ -223,7 +228,7 @@ class NewsCategory
     }
 
     /**
-     * Get parent
+     * Get parent.
      *
      * @return mixed
      */

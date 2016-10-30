@@ -5,7 +5,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * NewsComments
+ * NewsComments.
  *
  * @ORM\Table(name="news_comments", indexes={@ORM\Index(name="enabled", columns={"enabled"}), @ORM\Index(name="author_id", columns={"author_id"}), @ORM\Index(name="news_id", columns={"news_id"})})
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class NewsComments
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,49 +22,49 @@ class NewsComments
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="author_id", type="integer", nullable=false)
      */
     private $authorId;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
     private $enabled;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="date_added", type="integer", nullable=false)
      */
     private $dateAdded;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="lft", type="integer", nullable=false)
      */
     private $lft;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="rgt", type="integer", nullable=false)
      */
     private $rgt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="lvl", type="integer", nullable=false)
      */
     private $lvl;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="news_id", type="integer", nullable=false)
      */
@@ -78,16 +78,16 @@ class NewsComments
     private $content;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="last_edited", type="integer", nullable=false)
      */
     private $lastEdited;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -95,9 +95,10 @@ class NewsComments
     }
 
     /**
-     * Set authorId
+     * Set authorId.
      *
-     * @param  integer      $authorId
+     * @param int $authorId
+     *
      * @return NewsComments
      */
     public function setAuthorId($authorId)
@@ -108,9 +109,9 @@ class NewsComments
     }
 
     /**
-     * Get authorId
+     * Get authorId.
      *
-     * @return integer
+     * @return int
      */
     public function getAuthorId()
     {
@@ -118,9 +119,10 @@ class NewsComments
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param  boolean      $enabled
+     * @param bool $enabled
+     *
      * @return NewsComments
      */
     public function setEnabled($enabled)
@@ -131,9 +133,9 @@ class NewsComments
     }
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnabled()
     {
@@ -141,9 +143,10 @@ class NewsComments
     }
 
     /**
-     * Set dateAdded
+     * Set dateAdded.
      *
-     * @param  integer      $dateAdded
+     * @param int $dateAdded
+     *
      * @return NewsComments
      */
     public function setDateAdded($dateAdded)
@@ -154,9 +157,9 @@ class NewsComments
     }
 
     /**
-     * Get dateAdded
+     * Get dateAdded.
      *
-     * @return integer
+     * @return int
      */
     public function getDateAdded()
     {
@@ -164,9 +167,10 @@ class NewsComments
     }
 
     /**
-     * Set lft
+     * Set lft.
      *
-     * @param  integer      $lft
+     * @param int $lft
+     *
      * @return NewsComments
      */
     public function setLft($lft)
@@ -177,9 +181,9 @@ class NewsComments
     }
 
     /**
-     * Get lft
+     * Get lft.
      *
-     * @return integer
+     * @return int
      */
     public function getLft()
     {
@@ -187,9 +191,10 @@ class NewsComments
     }
 
     /**
-     * Set rgt
+     * Set rgt.
      *
-     * @param  integer      $rgt
+     * @param int $rgt
+     *
      * @return NewsComments
      */
     public function setRgt($rgt)
@@ -200,9 +205,9 @@ class NewsComments
     }
 
     /**
-     * Get rgt
+     * Get rgt.
      *
-     * @return integer
+     * @return int
      */
     public function getRgt()
     {
@@ -210,9 +215,10 @@ class NewsComments
     }
 
     /**
-     * Set lvl
+     * Set lvl.
      *
-     * @param  integer      $lvl
+     * @param int $lvl
+     *
      * @return NewsComments
      */
     public function setLvl($lvl)
@@ -223,9 +229,9 @@ class NewsComments
     }
 
     /**
-     * Get lvl
+     * Get lvl.
      *
-     * @return integer
+     * @return int
      */
     public function getLvl()
     {
@@ -233,9 +239,10 @@ class NewsComments
     }
 
     /**
-     * Set newsId
+     * Set newsId.
      *
-     * @param  integer      $newsId
+     * @param int $newsId
+     *
      * @return NewsComments
      */
     public function setNewsId($newsId)
@@ -246,9 +253,9 @@ class NewsComments
     }
 
     /**
-     * Get newsId
+     * Get newsId.
      *
-     * @return integer
+     * @return int
      */
     public function getNewsId()
     {
@@ -256,9 +263,10 @@ class NewsComments
     }
 
     /**
-     * Set content
+     * Set content.
      *
-     * @param  string       $content
+     * @param string $content
+     *
      * @return NewsComments
      */
     public function setContent($content)
@@ -269,7 +277,7 @@ class NewsComments
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -279,9 +287,10 @@ class NewsComments
     }
 
     /**
-     * Set lastEdited
+     * Set lastEdited.
      *
-     * @param  integer      $lastEdited
+     * @param int $lastEdited
+     *
      * @return NewsComments
      */
     public function setLastEdited($lastEdited)
@@ -292,9 +301,9 @@ class NewsComments
     }
 
     /**
-     * Get lastEdited
+     * Get lastEdited.
      *
-     * @return integer
+     * @return int
      */
     public function getLastEdited()
     {

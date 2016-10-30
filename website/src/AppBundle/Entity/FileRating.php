@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FileRating
+ * FileRating.
  *
  * @ORM\Table(name="file_ratings", indexes={@ORM\Index(name="IDX_95D0BEF293CB796C", columns={"file_id"}), @ORM\Index(name="IDX_95D0BEF2A76ED395", columns={"user_id"})})
  * @ORM\Entity(repositoryClass="Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRatingRepository")
@@ -19,7 +19,7 @@ class FileRating
     const REPORTED = 3;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -28,7 +28,7 @@ class FileRating
     private $id;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="status", type="integer", nullable=false)
      */
@@ -63,7 +63,7 @@ class FileRating
     private $comment;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="date_added", type="integer", nullable=false)
      */
@@ -85,7 +85,7 @@ class FileRating
      * @ORM\ManyToOne(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File", inversedBy="ratings")
      */
     private $file;
-    
+
     /**
      * FileRating constructor.
      */
@@ -93,11 +93,11 @@ class FileRating
     {
         $this->dateAdded = (new DateTimeImmutable())->getTimestamp();
     }
-    
+
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -105,9 +105,10 @@ class FileRating
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param  boolean    $status
+     * @param bool $status
+     *
      * @return FileRating
      */
     public function setStatus($status)
@@ -118,9 +119,9 @@ class FileRating
     }
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return boolean
+     * @return bool
      */
     public function getStatus()
     {
@@ -128,9 +129,10 @@ class FileRating
     }
 
     /**
-     * Set technical
+     * Set technical.
      *
-     * @param  string     $technical
+     * @param string $technical
+     *
      * @return FileRating
      */
     public function setTechnical($technical)
@@ -141,7 +143,7 @@ class FileRating
     }
 
     /**
-     * Get technical
+     * Get technical.
      *
      * @return string
      */
@@ -151,9 +153,10 @@ class FileRating
     }
 
     /**
-     * Set originality
+     * Set originality.
      *
-     * @param  string     $originality
+     * @param string $originality
+     *
      * @return FileRating
      */
     public function setOriginality($originality)
@@ -164,7 +167,7 @@ class FileRating
     }
 
     /**
-     * Get originality
+     * Get originality.
      *
      * @return string
      */
@@ -174,9 +177,10 @@ class FileRating
     }
 
     /**
-     * Set adrenaline
+     * Set adrenaline.
      *
-     * @param  string     $adrenaline
+     * @param string $adrenaline
+     *
      * @return FileRating
      */
     public function setAdrenaline($adrenaline)
@@ -187,7 +191,7 @@ class FileRating
     }
 
     /**
-     * Get adrenaline
+     * Get adrenaline.
      *
      * @return string
      */
@@ -197,9 +201,10 @@ class FileRating
     }
 
     /**
-     * Set comment
+     * Set comment.
      *
-     * @param  string     $comment
+     * @param string $comment
+     *
      * @return FileRating
      */
     public function setComment($comment)
@@ -210,7 +215,7 @@ class FileRating
     }
 
     /**
-     * Get comment
+     * Get comment.
      *
      * @return string
      */
@@ -220,9 +225,10 @@ class FileRating
     }
 
     /**
-     * Set dateAdded
+     * Set dateAdded.
      *
-     * @param  integer    $dateAdded
+     * @param int $dateAdded
+     *
      * @return FileRating
      */
     public function setDateAdded($dateAdded)
@@ -233,9 +239,9 @@ class FileRating
     }
 
     /**
-     * Get dateAdded
+     * Get dateAdded.
      *
-     * @return integer
+     * @return int
      */
     public function getDateAdded()
     {
@@ -243,9 +249,10 @@ class FileRating
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $user
+     * @param \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $user
+     *
      * @return FileRating
      */
     public function setUser(\Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $user = null)
@@ -256,7 +263,7 @@ class FileRating
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users
      */
@@ -266,9 +273,10 @@ class FileRating
     }
 
     /**
-     * Set file
+     * Set file.
      *
-     * @param  \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File $file
+     * @param \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File $file
+     *
      * @return FileRating
      */
     public function setFile(\Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File $file = null)
@@ -279,7 +287,7 @@ class FileRating
     }
 
     /**
-     * Get file
+     * Get file.
      *
      * @return \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File
      */

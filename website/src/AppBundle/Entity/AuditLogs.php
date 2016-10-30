@@ -5,7 +5,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * AuditLogs
+ * AuditLogs.
  *
  * @ORM\Table(name="audit_logs", indexes={@ORM\Index(name="via", columns={"via"})})
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class AuditLogs
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,7 +29,7 @@ class AuditLogs
     private $recordType;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="record_id", type="integer", nullable=false)
      */
@@ -57,14 +57,14 @@ class AuditLogs
     private $after;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="created", type="integer", nullable=false)
      */
     private $created;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="ip_address", type="integer", nullable=false)
      */
@@ -78,16 +78,16 @@ class AuditLogs
     private $reason;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="via", type="integer", nullable=true)
      */
     private $via;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -95,9 +95,10 @@ class AuditLogs
     }
 
     /**
-     * Set recordType
+     * Set recordType.
      *
-     * @param  string    $recordType
+     * @param string $recordType
+     *
      * @return AuditLogs
      */
     public function setRecordType($recordType)
@@ -108,7 +109,7 @@ class AuditLogs
     }
 
     /**
-     * Get recordType
+     * Get recordType.
      *
      * @return string
      */
@@ -118,9 +119,10 @@ class AuditLogs
     }
 
     /**
-     * Set recordId
+     * Set recordId.
      *
-     * @param  integer   $recordId
+     * @param int $recordId
+     *
      * @return AuditLogs
      */
     public function setRecordId($recordId)
@@ -131,9 +133,9 @@ class AuditLogs
     }
 
     /**
-     * Get recordId
+     * Get recordId.
      *
-     * @return integer
+     * @return int
      */
     public function getRecordId()
     {
@@ -141,9 +143,10 @@ class AuditLogs
     }
 
     /**
-     * Set action
+     * Set action.
      *
-     * @param  string    $action
+     * @param string $action
+     *
      * @return AuditLogs
      */
     public function setAction($action)
@@ -154,7 +157,7 @@ class AuditLogs
     }
 
     /**
-     * Get action
+     * Get action.
      *
      * @return string
      */
@@ -164,9 +167,10 @@ class AuditLogs
     }
 
     /**
-     * Set before
+     * Set before.
      *
-     * @param  string    $before
+     * @param string $before
+     *
      * @return AuditLogs
      */
     public function setBefore($before)
@@ -177,7 +181,7 @@ class AuditLogs
     }
 
     /**
-     * Get before
+     * Get before.
      *
      * @return string
      */
@@ -187,9 +191,10 @@ class AuditLogs
     }
 
     /**
-     * Set after
+     * Set after.
      *
-     * @param  string    $after
+     * @param string $after
+     *
      * @return AuditLogs
      */
     public function setAfter($after)
@@ -200,7 +205,7 @@ class AuditLogs
     }
 
     /**
-     * Get after
+     * Get after.
      *
      * @return string
      */
@@ -210,9 +215,10 @@ class AuditLogs
     }
 
     /**
-     * Set created
+     * Set created.
      *
-     * @param  integer   $created
+     * @param int $created
+     *
      * @return AuditLogs
      */
     public function setCreated($created)
@@ -223,9 +229,9 @@ class AuditLogs
     }
 
     /**
-     * Get created
+     * Get created.
      *
-     * @return integer
+     * @return int
      */
     public function getCreated()
     {
@@ -233,9 +239,10 @@ class AuditLogs
     }
 
     /**
-     * Set ipAddress
+     * Set ipAddress.
      *
-     * @param  integer   $ipAddress
+     * @param int $ipAddress
+     *
      * @return AuditLogs
      */
     public function setIpAddress($ipAddress)
@@ -246,9 +253,9 @@ class AuditLogs
     }
 
     /**
-     * Get ipAddress
+     * Get ipAddress.
      *
-     * @return integer
+     * @return int
      */
     public function getIpAddress()
     {
@@ -256,9 +263,10 @@ class AuditLogs
     }
 
     /**
-     * Set reason
+     * Set reason.
      *
-     * @param  string    $reason
+     * @param string $reason
+     *
      * @return AuditLogs
      */
     public function setReason($reason)
@@ -269,7 +277,7 @@ class AuditLogs
     }
 
     /**
-     * Get reason
+     * Get reason.
      *
      * @return string
      */
@@ -279,9 +287,10 @@ class AuditLogs
     }
 
     /**
-     * Set via
+     * Set via.
      *
-     * @param  integer   $via
+     * @param int $via
+     *
      * @return AuditLogs
      */
     public function setVia($via)
@@ -292,9 +301,9 @@ class AuditLogs
     }
 
     /**
-     * Get via
+     * Get via.
      *
-     * @return integer
+     * @return int
      */
     public function getVia()
     {

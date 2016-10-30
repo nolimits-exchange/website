@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 
 /**
- * Users
+ * Users.
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\UserRepository")
@@ -26,7 +26,7 @@ class Users extends User
      * @ORM\OneToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File", mappedBy="author")
      */
     protected $files;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File", mappedBy="downloadLog")
      */
@@ -40,7 +40,7 @@ class Users extends User
     protected $fileFavourites;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -50,7 +50,7 @@ class Users extends User
         $this->fileFavourites = new ArrayCollection();
         $this->downloadLog = new ArrayCollection();
     }
-    
+
     /**
      * @return mixed
      */

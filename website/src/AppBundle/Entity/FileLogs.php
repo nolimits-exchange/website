@@ -5,7 +5,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FileLogs
+ * FileLogs.
  *
  * @ORM\Table(name="file_logs", indexes={@ORM\Index(name="IDX_7973AE3293CB796C", columns={"file_id"}), @ORM\Index(name="IDX_7973AE32A76ED395", columns={"user_id"}), @ORM\Index(name="date_added", columns={"date_added"})})
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class FileLogs
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,7 +22,7 @@ class FileLogs
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="date_added", type="integer", nullable=false)
      */
@@ -44,7 +44,7 @@ class FileLogs
      * @ORM\ManyToOne(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File", inversedBy="downloadLog")
      */
     protected $file;
-    
+
     /**
      * FileLogs constructor.
      */
@@ -52,7 +52,7 @@ class FileLogs
     {
         $this->dateAdded = time();
     }
-    
+
     /**
      * @return int
      */
@@ -60,7 +60,7 @@ class FileLogs
     {
         return $this->id;
     }
-    
+
     /**
      * @param int $id
      */
@@ -68,7 +68,7 @@ class FileLogs
     {
         $this->id = $id;
     }
-    
+
     /**
      * @return int
      */
@@ -76,7 +76,7 @@ class FileLogs
     {
         return $this->dateAdded;
     }
-    
+
     /**
      * @param int $dateAdded
      */
@@ -84,7 +84,7 @@ class FileLogs
     {
         $this->dateAdded = $dateAdded;
     }
-    
+
     /**
      * @return Users
      */
@@ -92,7 +92,7 @@ class FileLogs
     {
         return $this->user;
     }
-    
+
     /**
      * @param Users $user
      */
@@ -100,7 +100,7 @@ class FileLogs
     {
         $this->user = $user;
     }
-    
+
     /**
      * @return File
      */
@@ -108,7 +108,7 @@ class FileLogs
     {
         return $this->file;
     }
-    
+
     /**
      * @param File $file
      */

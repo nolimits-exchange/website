@@ -5,7 +5,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RatingsVotes
+ * RatingsVotes.
  *
  * @ORM\Table(name="ratings_votes", indexes={@ORM\Index(name="IDX_FC5CAF33A32EFC6", columns={"rating_id"}), @ORM\Index(name="IDX_FC5CAF33A76ED395", columns={"user_id"})})
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class RatingsVotes
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,7 +22,7 @@ class RatingsVotes
     private $id;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="state", type="boolean", nullable=false)
      */
@@ -49,9 +49,9 @@ class RatingsVotes
     private $rating;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -59,9 +59,10 @@ class RatingsVotes
     }
 
     /**
-     * Set state
+     * Set state.
      *
-     * @param  boolean      $state
+     * @param bool $state
+     *
      * @return RatingsVotes
      */
     public function setState($state)
@@ -72,9 +73,9 @@ class RatingsVotes
     }
 
     /**
-     * Get state
+     * Get state.
      *
-     * @return boolean
+     * @return bool
      */
     public function getState()
     {
@@ -82,9 +83,10 @@ class RatingsVotes
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $user
+     * @param \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $user
+     *
      * @return RatingsVotes
      */
     public function setUser(\Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $user = null)
@@ -95,7 +97,7 @@ class RatingsVotes
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users
      */
@@ -105,9 +107,10 @@ class RatingsVotes
     }
 
     /**
-     * Set rating
+     * Set rating.
      *
-     * @param  \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating $rating
+     * @param \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating $rating
+     *
      * @return RatingsVotes
      */
     public function setRating(\Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating $rating = null)
@@ -118,7 +121,7 @@ class RatingsVotes
     }
 
     /**
-     * Get rating
+     * Get rating.
      *
      * @return \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating
      */

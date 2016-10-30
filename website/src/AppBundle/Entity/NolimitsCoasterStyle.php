@@ -5,7 +5,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Files
+ * Files.
  *
  * @ORM\Table(name="nolimits_coaster_styles")
  * @ORM\Entity(repositoryClass="Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\NolimitsCoasterStyleRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class NolimitsCoasterStyle
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,7 +29,7 @@ class NolimitsCoasterStyle
     protected $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="nolimits_id", type="integer", length=8, nullable=false)
      */
@@ -43,12 +43,12 @@ class NolimitsCoasterStyle
     protected $short;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="version", type="integer", length=11, nullable=false)
      */
     protected $version;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File", mappedBy="style")
      */

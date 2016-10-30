@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 
 /**
- * News
+ * News.
  *
  * @ORM\Table(name="news")
  * @ORM\Entity(repositoryClass="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\NewsRepository")
@@ -15,7 +15,7 @@ use Doctrine\ORM\PersistentCollection;
 class News
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -41,7 +41,7 @@ class News
     private $category;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
@@ -62,14 +62,14 @@ class News
     private $summary;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="date_added", type="integer", nullable=false)
      */
     private $dateAdded;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="last_edited", type="integer", nullable=false)
      */
@@ -83,14 +83,14 @@ class News
     private $url;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="hits", type="integer", nullable=false)
      */
     private $hits;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="unique_hits", type="integer", nullable=false)
      */
@@ -120,9 +120,9 @@ class News
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -130,9 +130,10 @@ class News
     }
 
     /**
-     * Set authorId
+     * Set authorId.
      *
-     * @param  Users $author
+     * @param Users $author
+     *
      * @return News
      */
     public function setAuthor(\Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $author)
@@ -143,7 +144,7 @@ class News
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return Users
      */
@@ -153,9 +154,10 @@ class News
     }
 
     /**
-     * Set categoryId
+     * Set categoryId.
      *
-     * @param  NewsCategory $category
+     * @param NewsCategory $category
+     *
      * @return News
      */
     public function setCategory(\Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\NewsCategory $category)
@@ -166,7 +168,7 @@ class News
     }
 
     /**
-     * Get categoryId
+     * Get categoryId.
      *
      * @return NewsCategory
      */
@@ -176,9 +178,10 @@ class News
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param  boolean $enabled
+     * @param bool $enabled
+     *
      * @return News
      */
     public function setEnabled($enabled)
@@ -189,9 +192,9 @@ class News
     }
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnabled()
     {
@@ -199,9 +202,10 @@ class News
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return News
      */
     public function setName($name)
@@ -212,7 +216,7 @@ class News
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -222,9 +226,10 @@ class News
     }
 
     /**
-     * Set summary
+     * Set summary.
      *
-     * @param  string $summary
+     * @param string $summary
+     *
      * @return News
      */
     public function setSummary($summary)
@@ -235,7 +240,7 @@ class News
     }
 
     /**
-     * Get summary
+     * Get summary.
      *
      * @return string
      */
@@ -245,9 +250,10 @@ class News
     }
 
     /**
-     * Set dateAdded
+     * Set dateAdded.
      *
-     * @param  integer $dateAdded
+     * @param int $dateAdded
+     *
      * @return News
      */
     public function setDateAdded($dateAdded)
@@ -258,9 +264,9 @@ class News
     }
 
     /**
-     * Get dateAdded
+     * Get dateAdded.
      *
-     * @return integer
+     * @return int
      */
     public function getDateAdded()
     {
@@ -268,9 +274,10 @@ class News
     }
 
     /**
-     * Set lastEdited
+     * Set lastEdited.
      *
-     * @param  integer $lastEdited
+     * @param int $lastEdited
+     *
      * @return News
      */
     public function setLastEdited($lastEdited)
@@ -281,9 +288,9 @@ class News
     }
 
     /**
-     * Get lastEdited
+     * Get lastEdited.
      *
-     * @return integer
+     * @return int
      */
     public function getLastEdited()
     {
@@ -291,9 +298,10 @@ class News
     }
 
     /**
-     * Set url
+     * Set url.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return News
      */
     public function setUrl($url)
@@ -304,7 +312,7 @@ class News
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -314,9 +322,10 @@ class News
     }
 
     /**
-     * Set hits
+     * Set hits.
      *
-     * @param  integer $hits
+     * @param int $hits
+     *
      * @return News
      */
     public function setHits($hits)
@@ -327,9 +336,9 @@ class News
     }
 
     /**
-     * Get hits
+     * Get hits.
      *
-     * @return integer
+     * @return int
      */
     public function getHits()
     {
@@ -337,9 +346,10 @@ class News
     }
 
     /**
-     * Set uniqueHits
+     * Set uniqueHits.
      *
-     * @param  integer $uniqueHits
+     * @param int $uniqueHits
+     *
      * @return News
      */
     public function setUniqueHits($uniqueHits)
@@ -350,9 +360,9 @@ class News
     }
 
     /**
-     * Get uniqueHits
+     * Get uniqueHits.
      *
-     * @return integer
+     * @return int
      */
     public function getUniqueHits()
     {

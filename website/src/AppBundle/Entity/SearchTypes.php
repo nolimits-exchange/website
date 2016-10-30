@@ -5,17 +5,15 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Search
+ * Class Search.
  *
  * @ORM\Table(name="search_types")
  * @ORM\Entity(readOnly=true, repositoryClass="Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\SearchTypesRepository")
- *
- * @package Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity
  */
 class SearchTypes
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", length=8, nullable=false)
@@ -30,14 +28,14 @@ class SearchTypes
     protected $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="version", type="integer", length=11, nullable=false)
      */
     protected $version;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="count", type="integer", length=11, nullable=false)
      */

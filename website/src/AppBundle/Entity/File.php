@@ -7,24 +7,23 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\ExpressionBuilder;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 
 /**
- * Files
+ * Files.
  *
  * @ORM\Table(name="files", indexes={@ORM\Index(name="IDX_6354059BACD6074", columns={"style_id"}), @ORM\Index(name="IDX_6354059F675F31B", columns={"author_id"}), @ORM\Index(name="status", columns={"status"}), @ORM\Index(name="rating", columns={"rating"})})
  * @ORM\Entity(repositoryClass="Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRepository")
  */
 class File
 {
-    const DISABLED   = 0;
-    const PUBLISHED  = 1;
-    const HIDDEN     = 2;
-    const ARCHIVED   = 3;
-    const UPLOADING  = 4;
-    
+    const DISABLED = 0;
+    const PUBLISHED = 1;
+    const HIDDEN = 2;
+    const ARCHIVED = 3;
+    const UPLOADING = 4;
+
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -33,7 +32,7 @@ class File
     private $id;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="status", type="integer", nullable=false)
      */
@@ -47,14 +46,14 @@ class File
     private $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="date_added", type="integer", nullable=false)
      */
     private $dateAdded;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="last_edited", type="integer", nullable=false)
      */
@@ -82,7 +81,7 @@ class File
     private $coasterExt;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="downloads", type="integer", nullable=false)
      */
@@ -115,7 +114,7 @@ class File
      * @ORM\OneToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating", mappedBy="file")
      */
     private $ratings;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileLogs", mappedBy="file")
      */
@@ -127,21 +126,21 @@ class File
     private $style;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
         $this->userFavourites = new ArrayCollection();
-        $this->ratings        = new ArrayCollection();
-        $this->downloadLog    = new ArrayCollection();
-        $this->lastEdited     = time();
-        $this->dateAdded      = time();
+        $this->ratings = new ArrayCollection();
+        $this->downloadLog = new ArrayCollection();
+        $this->lastEdited = time();
+        $this->dateAdded = time();
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -149,9 +148,9 @@ class File
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param  boolean $status
+     * @param bool $status
      *
      * @return File
      */
@@ -163,9 +162,9 @@ class File
     }
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {
@@ -173,9 +172,9 @@ class File
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return File
      */
@@ -187,7 +186,7 @@ class File
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -197,9 +196,9 @@ class File
     }
 
     /**
-     * Set dateAdded
+     * Set dateAdded.
      *
-     * @param  integer $dateAdded
+     * @param int $dateAdded
      *
      * @return File
      */
@@ -211,9 +210,9 @@ class File
     }
 
     /**
-     * Get dateAdded
+     * Get dateAdded.
      *
-     * @return integer
+     * @return int
      */
     public function getDateAdded()
     {
@@ -221,9 +220,9 @@ class File
     }
 
     /**
-     * Set lastEdited
+     * Set lastEdited.
      *
-     * @param  integer $lastEdited
+     * @param int $lastEdited
      *
      * @return File
      */
@@ -235,9 +234,9 @@ class File
     }
 
     /**
-     * Get lastEdited
+     * Get lastEdited.
      *
-     * @return integer
+     * @return int
      */
     public function getLastEdited()
     {
@@ -245,9 +244,9 @@ class File
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
      *
      * @return File
      */
@@ -259,7 +258,7 @@ class File
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -269,9 +268,9 @@ class File
     }
 
     /**
-     * Set screenshotExt
+     * Set screenshotExt.
      *
-     * @param  string $screenshotExt
+     * @param string $screenshotExt
      *
      * @return File
      */
@@ -283,7 +282,7 @@ class File
     }
 
     /**
-     * Get screenshotExt
+     * Get screenshotExt.
      *
      * @return string
      */
@@ -293,9 +292,9 @@ class File
     }
 
     /**
-     * Set coasterExt
+     * Set coasterExt.
      *
-     * @param  string $coasterExt
+     * @param string $coasterExt
      *
      * @return File
      */
@@ -307,7 +306,7 @@ class File
     }
 
     /**
-     * Get coasterExt
+     * Get coasterExt.
      *
      * @return string
      */
@@ -317,9 +316,9 @@ class File
     }
 
     /**
-     * Set downloads
+     * Set downloads.
      *
-     * @param  integer $downloads
+     * @param int $downloads
      *
      * @return File
      */
@@ -331,9 +330,9 @@ class File
     }
 
     /**
-     * Get downloads
+     * Get downloads.
      *
-     * @return integer
+     * @return int
      */
     public function getDownloads()
     {
@@ -341,9 +340,9 @@ class File
     }
 
     /**
-     * Set rating
+     * Set rating.
      *
-     * @param  string $rating
+     * @param string $rating
      *
      * @return File
      */
@@ -355,7 +354,7 @@ class File
     }
 
     /**
-     * Get rating
+     * Get rating.
      *
      * @return string
      */
@@ -365,9 +364,9 @@ class File
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $author
+     * @param \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users $author
      *
      * @return File
      */
@@ -379,7 +378,7 @@ class File
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users
      */
@@ -387,7 +386,7 @@ class File
     {
         return $this->author;
     }
-    
+
     /**
      * @return ArrayCollection
      */
@@ -411,8 +410,7 @@ class File
     {
         $this->style = $style;
     }
-    
-    
+
     /**
      * @return ArrayCollection
      */
@@ -420,7 +418,7 @@ class File
     {
         return $this->downloadLog;
     }
-    
+
     /**
      * @param mixed $downloadLog
      */
@@ -434,9 +432,9 @@ class File
      */
     public function getFilename(): string
     {
-        return $this->getName() . '.' . $this->getCoasterExt();
+        return $this->getName().'.'.$this->getCoasterExt();
     }
-    
+
     /**
      * Is the coaster rated by this user?
      *
@@ -455,7 +453,7 @@ class File
             )
             ->count();
     }
-    
+
     /**
      * Was this file downloaded by this user?
      *
@@ -474,7 +472,7 @@ class File
             )
             ->count();
     }
-    
+
     /**
      * @return Collection
      */

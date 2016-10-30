@@ -5,7 +5,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Faqs
+ * Faqs.
  *
  * @ORM\Table(name="faqs")
  * @ORM\Entity
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Faq
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -36,16 +36,16 @@ class Faq
     private $answer;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="`order`", type="integer")
      */
     private $order;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -53,10 +53,11 @@ class Faq
     }
 
     /**
-     * Set question
+     * Set question.
      *
-     * @param  string $question
-     * @return Faqs
+     * @param string $question
+     *
+     * @return Faq
      */
     public function setQuestion($question)
     {
@@ -66,7 +67,7 @@ class Faq
     }
 
     /**
-     * Get question
+     * Get question.
      *
      * @return string
      */
@@ -76,10 +77,11 @@ class Faq
     }
 
     /**
-     * Set answer
+     * Set answer.
      *
-     * @param  string $answer
-     * @return Faqs
+     * @param string $answer
+     *
+     * @return Faq
      */
     public function setAnswer($answer)
     {
@@ -89,7 +91,7 @@ class Faq
     }
 
     /**
-     * Get answer
+     * Get answer.
      *
      * @return string
      */
@@ -99,10 +101,11 @@ class Faq
     }
 
     /**
-     * Set order
+     * Set order.
      *
-     * @param  integer $order
-     * @return Faqs
+     * @param int $order
+     *
+     * @return Faq
      */
     public function setOrder($order)
     {
@@ -112,9 +115,9 @@ class Faq
     }
 
     /**
-     * Get order
+     * Get order.
      *
-     * @return integer
+     * @return int
      */
     public function getOrder()
     {
