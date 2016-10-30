@@ -69,7 +69,5 @@ class NewsController extends Controller
             'category' => $category,
             'pager'    => $pager,
         ]);
-
-        return new Response('', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
