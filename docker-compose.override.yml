@@ -11,12 +11,19 @@ services:
         links:
             - db
             - blackfire
+            - mail
 
     blackfire:
         image: blackfire/blackfire
         environment:
             - BLACKFIRE_SERVER_ID
             - BLACKFIRE_SERVER_TOKEN
+
+    mail:
+        image: mailhog/mailhog:latest
+        environment:
+            VIRTUAL_HOST: mail.nolimits.docker
+            VIRTUAL_PORT: 8025
 
     db:
         ports:

@@ -65,7 +65,10 @@ Running the website
     ./bin/worker
     ```
 
-Visit http://nolimits.docker
+Visit http://nolimits.docker and
+
+* http://mail.nolimits.docker for emails.
+
 
 Custom Images
 -----
