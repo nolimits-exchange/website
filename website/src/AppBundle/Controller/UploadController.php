@@ -10,6 +10,7 @@ use Thepixeldeveloper\Nolimits2PackageLoader\Package;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\UploadType;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\NolimitsCoasterStyleDetector\NolimitsCoaster2Detector;
 use ZipArchive;
 
 class UploadController extends Controller
@@ -27,29 +28,16 @@ class UploadController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-            $coaster    = $upload->getCoaster();
-            $screenshot = $upload->getScreenshot();
-
-            $file = new File();
-            $file->setName($upload->getName());
-            $file->setDescription($upload->getDescription());
-            $file->setAuthor($this->getUser());
-            $file->setCoasterExt($coaster->getClientOriginalExtension());
-            $file->setScreenshotExt($screenshot->getClientOriginalExtension());
-            $file->setStatus(File::UPLOADING);
+            
+            $fileEntity = $upload->getFileEntity();
+            $fileEntity->setAuthor($this->getUser());
     
-            $zip = new ZipArchive;
-            $zip->open($coaster->getRealPath());
-            
-            $package = new Package($zip);
-            
-            $file->setStyle(
-                $this->getDoctrine()->getRepository('AppBundle:NolimitsCoasterStyle')->findOneBy([
-                    'nolimitsId' => $package->getCoasters()->current()->getStyleId(),
-                    'version'    => 2,
-                ])
+            // Detect coaster style.
+            $nl2Detector = new NolimitsCoaster2Detector(
+                $this->getDoctrine()->getRepository('AppBundle:NolimitsCoasterStyle')
             );
+            
+            $fileEntity->setStyle($nl2Detector->read($upload));
     
             $this->getDoctrine()->getRepository('AppBundle:File')->save($file);
 
