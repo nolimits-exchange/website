@@ -116,7 +116,7 @@ class File
     private $ratings;
 
     /**
-     * @ORM\OneToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileLogs", mappedBy="file")
+     * @ORM\ManyToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users", inversedBy="downloadLog")
      */
     private $downloadLog;
 

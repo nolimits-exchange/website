@@ -4,6 +4,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Form;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 
 /**
  * Class Upload
@@ -126,5 +127,22 @@ class Upload
         $this->screenshot = $screenshot;
 
         return $this;
+    }
+    
+    /**
+     * Populate a file entity from the form.
+     *
+     * @return File
+     */
+    public function getFileEntity(): File
+    {
+        $file = new File();
+        $file->setName($this->getName());
+        $file->setDescription($this->getDescription());
+        $file->setCoasterExt($this->getCoaster()->getClientOriginalExtension());
+        $file->setScreenshotExt($this->getScreenshot()->getClientOriginalExtension());
+        $file->setStatus(File::UPLOADING);
+        
+        return $file;
     }
 }
