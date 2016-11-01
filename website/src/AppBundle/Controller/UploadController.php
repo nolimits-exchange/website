@@ -6,13 +6,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Thepixeldeveloper\Nolimits2PackageLoader\Package;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\UploadType;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\NolimitsCoasterStyleDetector\NolimitsCoaster1Detector;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\NolimitsCoasterStyleDetector\NolimitsCoaster2Detector;
-use ZipArchive;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\NolimitsCoasterStyleDetector\NolimitsCoasterDetector;
 
+/**
+ * Class UploadController
+ *
+ * @package Thepixeldeveloper\Nolimitsexchange\AppBundle\Controller
+ */
 class UploadController extends Controller
 {
     /**
@@ -28,21 +33,25 @@ class UploadController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            
-            $fileEntity = $upload->getFileEntity();
-            $fileEntity->setAuthor($this->getUser());
     
-            // Detect coaster style.
-            $nl2Detector = new NolimitsCoaster2Detector(
-                $this->getDoctrine()->getRepository('AppBundle:NolimitsCoasterStyle')
-            );
+            $coasterStyleRepository = $this->getDoctrine()->getRepository('AppBundle:NolimitsCoasterStyle');
+    
+            // Todo: Move this to a service.
+            $nolimitsCoasterDetector = new NolimitsCoasterDetector([
+                new NolimitsCoaster1Detector($coasterStyleRepository),
+                new NolimitsCoaster2Detector($coasterStyleRepository),
+            ]);
             
-            $fileEntity->setStyle($nl2Detector->read($upload));
+            $file = $upload->getFileEntity();
+            $file->setAuthor($this->getUser());
+            $file->setStyle($nolimitsCoasterDetector->read($upload));
     
             $this->getDoctrine()->getRepository('AppBundle:File')->save($file);
 
-            $this->get('app.file_uploader')->upload($coaster, $file->getId());
-            $this->get('app.file_uploader')->upload($screenshot, $file->getId());
+            // Todo: Remove silly duplication.
+            // Todo: Remove UploadedFile type-hint.
+            $this->get('app.file_uploader')->upload($upload->getCoaster(), $file->getId());
+            $this->get('app.file_uploader')->upload($upload->getScreenshot(), $file->getId());
 
             $queue = $this->get('jobqueue')->attach('process_file_upload');
 
