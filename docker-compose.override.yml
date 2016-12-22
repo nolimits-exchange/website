@@ -35,3 +35,9 @@ services:
             - db
         environment:
            VIRTUAL_HOST: db.nolimits.docker
+
+    avatar-generator:
+        image: adamlc/avatar-generator
+        environment:
+            VIRTUAL_HOST: screenshots.nolimits.docker
+            VIRTUAL_PORT: 8080
