@@ -2,13 +2,12 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\UploadType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\UploadStarterHandler;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\UploadType;
 
 class UploadController extends Controller
 {
