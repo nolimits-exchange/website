@@ -117,43 +117,32 @@ oneup_flysystem:
 
 services:
 
-    faker.provider.image:
-        class: bheller\ImagesGenerator\ImagesGeneratorProvider
-        arguments:
-            - "@faker.generator"
-        tags:
-            - { name: "bazinga_faker.provider" }
-
-    handler.upload.form:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\CoasterUploadFormHandler
+    handler.coaster.upload.started:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster\UploadStartedHandler
         arguments:
             - "@=service('doctrine').getRepository('AppBundle:File')"
             - "@event_dispatcher"
 
-    handler.coaster.published:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\CoasterPublishedHandler
+    handler.coaster.upload.finished:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster\UploadFinishedHandler
         arguments:
             - "@upload_coaster_service"
             - "@upload_screenshot_service"
             - "@event_dispatcher"
 
-    listener.coaster.uploading.queue:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\CoasterUploadingListener
+    listener.coaster.upload.started.move_to_ephemeral:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\MoveToEphemeralListener
         arguments:
             - "@app.file_uploader"
-            - "@jobqueue"
         tags:
-            - { name: kernel.event_listener, event: coaster.uploading, method: onCoasterUpload }
+            - { name: kernel.event_listener, event: coaster.upload.started }
 
-#    listener.coaster.uploading.type_detection:
-
-
-    listener.coaster.published:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\CoasterPublishedListener
+    listener.coaster.upload.finished.mark_as_published:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Finished\MarkAsPublishedListener
         arguments:
             - "@=service('doctrine').getRepository('AppBundle:File')"
         tags:
-            - { name: kernel.event_listener, event: coaster.published, method: onCoasterPublished }
+            - { name: kernel.event_listener, event: coaster.upload.finished }
 
 #    faker.provider.repeating_characters:
 #        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Generators\RepeatingCharactersGenerator

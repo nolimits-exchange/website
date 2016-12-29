@@ -1,19 +1,15 @@
 <?php
 
-namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers;
+namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster;
 
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\CoasterPublishedEvent;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\Coaster\UploadInProgressEvent;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\UploadCoasterService;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\UploadScreenshotService;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\Coaster\UploadFinishedEvent;
 
-/**
- * Class CoasterPublishedHandler
- *
- * @package Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers
- */
-class CoasterPublishedHandler
+class UploadFinishedHandler
 {
     /**
      * @var UploadCoasterService
@@ -53,18 +49,18 @@ class CoasterPublishedHandler
      *
      * @param File $file
      *
-     * @return int
+     * @return mixed
      */
-    public function handle(File $file): int
+    public function handle(File $file)
     {
-        /**
-         * Reasons for the coaster not being found.
-         *
-         * 1. The database was seeded during development, thus changing IDs.
-         */
         if (null === $file) {
-            return 0;
+            return null;
         }
+    
+        $this->eventDispatcher->dispatch(
+            UploadInProgressEvent::NAME,
+            new UploadInProgressEvent($file)
+        );
         
         $coasterUploadReturnCode    = $this->uploadCoasterService->execute($file->getId(), $file->getCoasterExt());
         $screenshotUploadReturnCode = $this->uploadScreenshotService->execute($file->getId(), $file->getScreenshotExt());
@@ -73,8 +69,8 @@ class CoasterPublishedHandler
         
         if ($returnCode) {
             $this->eventDispatcher->dispatch(
-                CoasterPublishedEvent::NAME,
-                new CoasterPublishedEvent($file)
+                UploadFinishedEvent::NAME,
+                new UploadFinishedEvent($file)
             );
         }
         

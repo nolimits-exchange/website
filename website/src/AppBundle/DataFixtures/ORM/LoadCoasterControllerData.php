@@ -40,11 +40,11 @@ class LoadCoasterControllerData extends AbstractFixture implements FixtureInterf
         $form->setScreenshot($this->getScreenshot());
 
         $coaster = $this->container
-            ->get('handler.upload.form')
+            ->get('handler.coaster.upload.started')
             ->handle($form, $user);
         
         $this->container
-            ->get('handler.coaster.published')
+            ->get('handler.coaster.upload.finished')
             ->handle($coaster);
     }
     
@@ -55,7 +55,7 @@ class LoadCoasterControllerData extends AbstractFixture implements FixtureInterf
     {
         $path = $this->container->get('faker.generator')->imageGenerator(null, 1280, 1024);
         
-        return new UploadedFile($path, basename($path));
+        return new UploadedFile($path, basename($path), null, null, null, true);
     }
     
     /**
@@ -65,7 +65,7 @@ class LoadCoasterControllerData extends AbstractFixture implements FixtureInterf
     {
         $path = $this->container->get('faker.generator')->file(__DIR__ . '/../coasters');
         
-        return new UploadedFile($path, basename($path));
+        return new UploadedFile($path, basename($path), null, null, null, true);
     }
     
     /**

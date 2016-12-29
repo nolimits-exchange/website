@@ -1,18 +1,18 @@
 <?php
 
-namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Events;
+namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\Coaster;
 
 use Symfony\Component\EventDispatcher\Event;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 
 /**
- * Class CoasterPublishedEvent
+ * Class UploadFinishedEvent
  *
- * @package Thepixeldeveloper\Nolimitsexchange\AppBundle\Events
+ * @package Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\Coaster
  */
-class CoasterPublishedEvent extends Event
+class UploadFinishedEvent extends Event
 {
-    const NAME = 'coaster.published';
+    const NAME = 'coaster.upload.finished';
     
     /**
      * @var File

@@ -6,3 +6,12 @@ framework:
         packages:
             screenshots:
                 base_url: "https://%object_storage_host%/images"
+
+services:
+
+    listener.coaster.upload.started.add_to_queue:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\AddToQueueListener
+        arguments:
+            - "@jobqueue"
+        tags:
+            - { name: kernel.event_listener, event: coaster.upload.started, priority: -255 }

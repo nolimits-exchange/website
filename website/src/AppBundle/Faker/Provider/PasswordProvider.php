@@ -41,7 +41,7 @@ class PasswordProvider extends Base
      *
      * @throws \RuntimeException
      */
-    public function fileGenerator(Users $user, string $raw, string $salt): string
+    public function password(Users $user, string $raw, string $salt): string
     {
         $encoder = $this->encoderFactory->getEncoder($user);
 

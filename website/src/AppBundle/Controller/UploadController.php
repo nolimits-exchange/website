@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\UploadType;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\CoasterUploadFormHandler;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\UploadStarterHandler;
 
 class UploadController extends Controller
 {
@@ -27,7 +27,7 @@ class UploadController extends Controller
         if ($form->isValid()) {
             
             $file = $this
-                ->get('handler.upload.form')
+                ->get('handler.coaster.upload.started')
                 ->handle($upload, $this->getUser());
 
             return $this->redirectToRoute('coaster', [

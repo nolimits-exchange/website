@@ -1,20 +1,15 @@
 <?php
 
-namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers;
+namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster;
 
 use FOS\UserBundle\Model\UserInterface;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRepository;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\CoasterUploadingEvent;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\Coaster\UploadStartedEvent;
 
-/**
- * Class CoasterUploadHandler
- *
- * @package Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers
- */
-class CoasterUploadFormHandler
+class UploadStartedHandler
 {
     /**
      * @var FileRepository
@@ -27,7 +22,7 @@ class CoasterUploadFormHandler
     protected $eventDispatcher;
     
     /**
-     * CoasterUploadFormHandler constructor.
+     * UploadStartedHandler constructor.
      *
      * @param FileRepository           $fileRepository
      * @param EventDispatcherInterface $eventDispatcher
@@ -58,12 +53,12 @@ class CoasterUploadFormHandler
         $file->setCoasterExt($coaster->getClientOriginalExtension());
         $file->setScreenshotExt($screenshot->getClientOriginalExtension());
         $file->setStatus(File::UPLOADING);
-        
-        $event = new CoasterUploadingEvent($upload, $file);
-        
-        $this->eventDispatcher->dispatch(CoasterUploadingEvent::NAME, $event);
-        
+    
         $this->fileRepository->save($file);
+        
+        $event = new UploadStartedEvent($upload, $file);
+        
+        $this->eventDispatcher->dispatch(UploadStartedEvent::NAME, $event);
         
         return $file;
     }

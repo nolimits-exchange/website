@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRepository;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\CoasterPublishedHandler;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\UploadFinishedHandler;
 
 class ProcessFileUploadCommand extends Command
 {
@@ -51,7 +51,7 @@ class ProcessFileUploadCommand extends Command
          */
         $coaster = $this->coasterRepository->find($id);
         
-        $handler = new CoasterPublishedHandler();
+        $handler = new UploadFinishedHandler();
         
         return $handler->handle($coaster);
     }

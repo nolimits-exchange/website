@@ -1,11 +1,12 @@
 <?php
 
-namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners;
+namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Finished;
 
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\CoasterPublishedEvent;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRepository;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\Coaster\UploadFinishedEvent;
 
-class CoasterPublishedListener
+class MarkAsPublishedListener
 {
     /**
      * @var FileRepository
@@ -23,13 +24,12 @@ class CoasterPublishedListener
     }
     
     /**
-     * @param CoasterPublishedEvent $event
+     * @param UploadFinishedEvent $event
      */
-    public function onCoasterPublished(CoasterPublishedEvent $event)
+    public function onCoasterUploadFinished(UploadFinishedEvent $event)
     {
         $coaster = $event->getFile();
         $coaster->setStatus(File::PUBLISHED);
-    
         $this->fileRepository->save($coaster);
     }
 }
