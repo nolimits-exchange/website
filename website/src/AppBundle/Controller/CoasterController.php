@@ -46,7 +46,7 @@ class CoasterController extends Controller
         
         $ratingForm = $this->createForm(RateType::class, $rate);
         $ratingForm->handleRequest($request);
-    
+        
         if ($ratingForm->isValid()) {
             $rating = new FileRating();
             $rating->setTechnical($rate->getTechnical());
@@ -56,15 +56,15 @@ class CoasterController extends Controller
             $rating->setUser($this->getUser());
             $rating->setStatus(FileRating::PUBLISHED);
             $rating->setFile($coaster);
-    
+        
             $this->getDoctrine()->getRepository('AppBundle:FileRating')->save($rating);
-
+        
             return $this->redirectToRoute('coaster', [
                 'id'   => $coaster->getId(),
                 'slug' => $this->get('slugify')->slugify($coaster->getName()),
             ]);
         }
-
+        
         return $this->render('AppBundle:Coaster:index.html.twig', [
             'coaster'    => $coaster,
             'rated'      => $rated,

@@ -117,6 +117,10 @@ class File
 
     /**
      * @ORM\ManyToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users", inversedBy="downloadLog")
+     * @ORM\JoinTable(name="file_logs",
+     *     joinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
      */
     private $downloadLog;
 
@@ -398,7 +402,7 @@ class File
     /**
      * @return NolimitsCoasterStyle
      */
-    public function getStyle(): NolimitsCoasterStyle
+    public function getStyle()
     {
         return $this->style;
     }

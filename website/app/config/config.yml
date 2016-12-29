@@ -130,12 +130,21 @@ services:
             - "@upload_screenshot_service"
             - "@event_dispatcher"
 
+    listener.coaster.upload.started.detect_style:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\DetectStyleListener
+        arguments:
+            - "@=service('doctrine').getRepository('AppBundle:File')"
+            - "@=service('doctrine').getRepository('AppBundle:NolimitsCoasterStyle')"
+            - "@style_detector"
+        tags:
+            - { name: kernel.event_listener, event: coaster.upload.started, priority: 255 }
+
     listener.coaster.upload.started.move_to_ephemeral:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\MoveToEphemeralListener
         arguments:
             - "@app.file_uploader"
         tags:
-            - { name: kernel.event_listener, event: coaster.upload.started }
+            - { name: kernel.event_listener, event: coaster.upload.started, priority: 0 }
 
     listener.coaster.upload.finished.mark_as_published:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Finished\MarkAsPublishedListener
@@ -143,6 +152,15 @@ services:
             - "@=service('doctrine').getRepository('AppBundle:File')"
         tags:
             - { name: kernel.event_listener, event: coaster.upload.finished }
+
+    style_detector:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Coaster\StyleDetector
+        arguments:
+            - ["@style_detector.version_2"]
+
+    style_detector.version_2:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Coaster\StyleDetector\Nolimits2Detector
+        public: false
 
 #    faker.provider.repeating_characters:
 #        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Generators\RepeatingCharactersGenerator
@@ -194,6 +212,7 @@ services:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ProcessFileUploadCommand
         arguments:
             - "@=service('doctrine').getRepository('AppBundle:File')"
+            - "@handler.coaster.upload.finished"
         tags:
             -  { name: console.command }
 

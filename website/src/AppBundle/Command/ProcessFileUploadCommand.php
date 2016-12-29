@@ -6,9 +6,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRepository;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\UploadFinishedHandler;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster\UploadFinishedHandler;
 
 class ProcessFileUploadCommand extends Command
 {
@@ -16,19 +15,26 @@ class ProcessFileUploadCommand extends Command
      * @var FileRepository
      */
     protected $coasterRepository;
-
+    
+    /**
+     * @var UploadFinishedHandler
+     */
+    protected $handler;
+    
     /**
      * ProcessFileUploadCommand constructor.
      *
-     * @param FileRepository $coasterRepository
+     * @param FileRepository        $coasterRepository
+     * @param UploadFinishedHandler $handler
      */
-    public function __construct(FileRepository $coasterRepository)
+    public function __construct(FileRepository $coasterRepository, UploadFinishedHandler $handler)
     {
         $this->coasterRepository = $coasterRepository;
-
+        $this->handler = $handler;
+        
         parent::__construct();
     }
-
+    
     protected function configure()
     {
         $this
@@ -44,15 +50,10 @@ class ProcessFileUploadCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $id = $input->getArgument('id');
-
-        /**
-         * @var File $coaster
-         */
-        $coaster = $this->coasterRepository->find($id);
+        $file = $this->coasterRepository->find(
+            $input->getArgument('id')
+        );
         
-        $handler = new UploadFinishedHandler();
-        
-        return $handler->handle($coaster);
+        return (int) $this->handler->handle($file);
     }
 }
