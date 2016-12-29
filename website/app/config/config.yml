@@ -117,6 +117,44 @@ oneup_flysystem:
 
 services:
 
+    faker.provider.image:
+        class: bheller\ImagesGenerator\ImagesGeneratorProvider
+        arguments:
+            - "@faker.generator"
+        tags:
+            - { name: "bazinga_faker.provider" }
+
+    handler.upload.form:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\CoasterUploadFormHandler
+        arguments:
+            - "@=service('doctrine').getRepository('AppBundle:File')"
+            - "@event_dispatcher"
+
+    handler.coaster.published:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\CoasterPublishedHandler
+        arguments:
+            - "@upload_coaster_service"
+            - "@upload_screenshot_service"
+            - "@event_dispatcher"
+
+    listener.coaster.uploading.queue:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\CoasterUploadingListener
+        arguments:
+            - "@app.file_uploader"
+            - "@jobqueue"
+        tags:
+            - { name: kernel.event_listener, event: coaster.uploading, method: onCoasterUpload }
+
+#    listener.coaster.uploading.type_detection:
+
+
+    listener.coaster.published:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\CoasterPublishedListener
+        arguments:
+            - "@=service('doctrine').getRepository('AppBundle:File')"
+        tags:
+            - { name: kernel.event_listener, event: coaster.published, method: onCoasterPublished }
+
 #    faker.provider.repeating_characters:
 #        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Generators\RepeatingCharactersGenerator
 #        arguments: [@faker.generator]
@@ -166,8 +204,6 @@ services:
     app.command.process_file_upload:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ProcessFileUploadCommand
         arguments:
-            - "@upload_coaster_service"
-            - "@upload_screenshot_service"
             - "@=service('doctrine').getRepository('AppBundle:File')"
         tags:
             -  { name: console.command }

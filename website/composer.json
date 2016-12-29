@@ -43,7 +43,8 @@
     "intervention/image": "^2.3",
     "twig/extensions": "^1.3",
     "heristop/jobqueue-bundle": "dev-master",
-    "thepixeldeveloper/nolimits2packageloader": "^1.1"
+    "thepixeldeveloper/nolimits2packageloader": "^1.1",
+    "bheller/images-generator": "^1.0"
   },
   "require-dev": {
     "symfony/phpunit-bridge": "^3.0",

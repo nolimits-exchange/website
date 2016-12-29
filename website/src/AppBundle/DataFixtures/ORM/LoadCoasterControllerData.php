@@ -5,8 +5,9 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\DataFixtures\ORM;
 use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users;
 
 /**
@@ -18,6 +19,8 @@ class LoadCoasterControllerData extends AbstractFixture implements FixtureInterf
 {
     /**
      * {@inheritDoc}
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
      */
     public function load(ObjectManager $manager)
     {
@@ -30,17 +33,39 @@ class LoadCoasterControllerData extends AbstractFixture implements FixtureInterf
     
         $manager->persist($user);
         
-        $file = new File();
-        $file->setName('Test Coaster');
-        $file->setStatus(File::PUBLISHED);
-        $file->setAuthor($user);
-        $file->setDescription($this->container->get('faker.generator')->markdownParagraphs(random_int(1, 5)));
-        $file->setStyle($this->getReference('style-1'));
-        $file->setCoasterExt('nlpack');
-        $file->setScreenshotExt('png');
+        $form = new Upload();
+        $form->setName('Test Coaster');
+        $form->setDescription($this->container->get('faker.generator')->markdownParagraphs(random_int(1, 5)));
+        $form->setCoaster($this->getCoaster());
+        $form->setScreenshot($this->getScreenshot());
+
+        $coaster = $this->container
+            ->get('handler.upload.form')
+            ->handle($form, $user);
         
-        $manager->persist($file);
-        $manager->flush();
+        $this->container
+            ->get('handler.coaster.published')
+            ->handle($coaster);
+    }
+    
+    /**
+     * @return UploadedFile
+     */
+    protected function getScreenshot()
+    {
+        $path = $this->container->get('faker.generator')->imageGenerator(null, 1280, 1024);
+        
+        return new UploadedFile($path, basename($path));
+    }
+    
+    /**
+     * @return UploadedFile
+     */
+    protected function getCoaster()
+    {
+        $path = $this->container->get('faker.generator')->file(__DIR__ . '/../coasters');
+        
+        return new UploadedFile($path, basename($path));
     }
     
     /**

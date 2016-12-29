@@ -7,41 +7,23 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\SaveableInterface;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\UploadCoasterService;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\UploadScreenshotService;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRepository;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\CoasterPublishedHandler;
 
 class ProcessFileUploadCommand extends Command
 {
     /**
-     * @var UploadCoasterService
-     */
-    protected $uploadCoasterService;
-
-    /**
-     * @var UploadScreenshotService
-     */
-    protected $uploadScreenshotService;
-
-    /**
-     * @var SaveableInterface
+     * @var FileRepository
      */
     protected $coasterRepository;
 
     /**
      * ProcessFileUploadCommand constructor.
      *
-     * @param UploadCoasterService $uploadCoasterService
-     * @param UploadScreenshotService $uploadScreenshotService
-     * @param SaveableInterface $coasterRepository
+     * @param FileRepository $coasterRepository
      */
-    public function __construct(
-        UploadCoasterService $uploadCoasterService,
-        UploadScreenshotService $uploadScreenshotService,
-        SaveableInterface $coasterRepository
-    ) {
-        $this->uploadCoasterService = $uploadCoasterService;
-        $this->uploadScreenshotService = $uploadScreenshotService;
+    public function __construct(FileRepository $coasterRepository)
+    {
         $this->coasterRepository = $coasterRepository;
 
         parent::__construct();
@@ -68,32 +50,9 @@ class ProcessFileUploadCommand extends Command
          * @var File $coaster
          */
         $coaster = $this->coasterRepository->find($id);
-
-        /**
-         * Reasons for the coaster not being found.
-         *
-         * 1. The database was seeded during development, thus changing IDs.
-         */
-        if (null === $coaster) {
-            return 0;
-        }
-
-        $coasterUploadReturnCode    = $this->uploadCoasterService->execute($id, $coaster->getCoasterExt());
-        $screenshotUploadReturnCode = $this->uploadScreenshotService->execute($id, $coaster->getScreenshotExt());
-
-        $returnCode = $coasterUploadReturnCode === 0 && $screenshotUploadReturnCode === 0;
-
-        if ($returnCode) {
-            $this->setDoneStatus($coaster);
-        }
-
-        return 0; // Tolerate broken stuff
-    }
-
-    protected function setDoneStatus(File $coaster)
-    {
-        $coaster->setStatus(File::PUBLISHED);
-
-        $this->coasterRepository->save($coaster);
+        
+        $handler = new CoasterPublishedHandler();
+        
+        return $handler->handle($coaster);
     }
 }
