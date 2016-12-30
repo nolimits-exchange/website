@@ -116,11 +116,7 @@ class File
     private $ratings;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users", inversedBy="downloadLog")
-     * @ORM\JoinTable(name="file_logs",
-     *     joinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users", mappedBy="downloadLog")
      */
     private $downloadLog;
 
@@ -437,44 +433,6 @@ class File
     public function getFilename(): string
     {
         return $this->getName().'.'.$this->getCoasterExt();
-    }
-
-    /**
-     * Is the coaster rated by this user?
-     *
-     * @param Users $user
-     *
-     * @return bool
-     */
-    public function isRatedByUser(Users $user = null): bool
-    {
-        return (bool) $this
-            ->getRatings()
-            ->matching(
-                new Criteria(
-                    (new ExpressionBuilder())->eq('user', $user)
-                )
-            )
-            ->count();
-    }
-
-    /**
-     * Was this file downloaded by this user?
-     *
-     * @param Users $user
-     *
-     * @return bool
-     */
-    public function wasDownloadedByUser(Users $user = null): bool
-    {
-        return (bool) $this
-            ->getDownloadLog()
-            ->matching(
-                new Criteria(
-                    (new ExpressionBuilder())->eq('user', $user)
-                )
-            )
-            ->count();
     }
 
     /**

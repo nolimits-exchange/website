@@ -39,9 +39,6 @@ class CoasterController extends Controller
             throw $this->createNotFoundException();
         }
         
-        $rated      = $coaster->isRatedByUser($this->getUser());
-        $downloaded = $coaster->wasDownloadedByUser($this->getUser());
-        
         $rate = new Rate();
         
         $ratingForm = $this->createForm(RateType::class, $rate);
@@ -67,8 +64,8 @@ class CoasterController extends Controller
         
         return $this->render('AppBundle:Coaster:index.html.twig', [
             'coaster'    => $coaster,
-            'rated'      => $rated,
-            'downloaded' => $downloaded,
+            'rated'      => $coaster->getRatings()->contains($this->getUser()),
+            'downloaded' => $coaster->getDownloadLog()->contains($this->getUser()),
             'ratingForm' => $ratingForm->createView(),
         ]);
     }
