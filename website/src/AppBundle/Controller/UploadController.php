@@ -28,6 +28,15 @@ class UploadController extends Controller
             $file = $this
                 ->get('handler.coaster.upload.started')
                 ->handle($upload, $this->getUser());
+    
+            $queue = $this->get('jobqueue')->attach('process_file_upload');
+    
+            $queue->push([
+                'command'  => 'process:file_upload',
+                'argument' => [
+                    'id' => $file->getId()
+                ]
+            ]);
 
             return $this->redirectToRoute('coaster', [
                 'id'   => $file->getId(),
