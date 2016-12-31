@@ -36,14 +36,11 @@ class Version20151229135308 extends AbstractMigration
         $table->addColumn('username_canonical', 'string', ['length' => 255, 'notnull' => true]);
         $table->addColumn('email_canonical', 'string', ['length' => 255, 'notnull' => true]);
         $table->addColumn('enabled', 'boolean', ['notnull' => true]);
-        $table->addColumn('salt', 'string', ['length' => 255, 'notnull' => true]);
-        $table->addColumn('locked', 'boolean', ['notnull' => true]);
-        $table->addColumn('expired', 'boolean', ['notnull' => true]);
+        $table->addColumn('salt', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('expires_at', 'datetime', ['notnull' => false]);
         $table->addColumn('confirmation_token', 'string', ['length' => 255, 'notnull' => false]);
         $table->addColumn('password_requested_at', 'datetime', ['notnull' => false]);
         $table->addColumn('roles', 'array', ['notnull' => true]);
-        $table->addColumn('credentials_expired', 'boolean', ['notnull' => true]);
         $table->addColumn('credentials_expire_at', 'datetime', ['notnull' => false]);
         $table->addColumn('last_login', 'datetime', ['notnull' => false]);
 

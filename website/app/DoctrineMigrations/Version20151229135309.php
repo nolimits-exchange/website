@@ -18,7 +18,6 @@ class Version20151229135309 extends AbstractMigration
         $this->addSql('UPDATE users SET username_canonical = LOWER(username)');
         $this->addSql('UPDATE users SET email_canonical = LOWER(email)');
         $this->addSql('UPDATE users SET enabled = 1');
-        $this->addSql('UPDATE users SET locked = 0');
         $this->addSql('UPDATE users SET roles = "a:0:{}"');
     }
 

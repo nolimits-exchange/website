@@ -25,7 +25,7 @@
     "sensio/distribution-bundle": "@stable",
     "sensio/framework-extra-bundle": "@stable",
     "vlucas/phpdotenv": "@stable",
-    "friendsofsymfony/user-bundle": "dev-master",
+    "friendsofsymfony/user-bundle": "~2.0@dev",
     "stof/doctrine-extensions-bundle": "@stable",
     "cocur/slugify": "@stable",
     "doctrine/doctrine-migrations-bundle": "@stable",

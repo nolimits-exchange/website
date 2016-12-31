@@ -1,5 +1,7 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{% block title %}Check Email - Nolimits Exchange{% endblock %}
+
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
@@ -7,10 +9,10 @@
         <div class="col-xs-12">
             <div class="panel panel-page">
                 <div class="panel-heading">
-                    <h1>Forgotten password</h1>
+                    <h1>Check Email</h1>
                 </div>
                 <div class="panel-body">
-                    <p>{{ 'resetting.password_already_requested'|trans }}</p>
+                    <p>{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}</p>
                 </div>
             </div>
         </div>
