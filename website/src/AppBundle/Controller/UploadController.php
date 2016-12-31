@@ -23,7 +23,7 @@ class UploadController extends Controller
         $form = $this->createForm(UploadType::class, $upload);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             
             $file = $this
                 ->get('handler.coaster.upload.started')

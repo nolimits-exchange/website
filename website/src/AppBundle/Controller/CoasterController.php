@@ -44,7 +44,7 @@ class CoasterController extends Controller
         $ratingForm = $this->createForm(RateType::class, $rate);
         $ratingForm->handleRequest($request);
         
-        if ($ratingForm->isValid()) {
+        if ($ratingForm->isSubmitted() && $ratingForm->isValid()) {
             $rating = new FileRating();
             $rating->setTechnical($rate->getTechnical());
             $rating->setAdrenaline($rate->getAdrenaline());

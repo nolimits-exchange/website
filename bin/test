@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-args="./vendor/bin/paratest --no-test-tokens -p 4 --runner WrapperRunner $@"
+args="./vendor/bin/phpunit $@"
 
 docker-compose exec web sh -c "$args"
