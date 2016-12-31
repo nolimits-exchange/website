@@ -19,7 +19,7 @@ class Contact
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback="getReasons")
+     * @Assert\Choice(callback="getReasons", strict=true)
      */
     protected $reason;
 
