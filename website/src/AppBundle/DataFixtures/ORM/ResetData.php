@@ -19,6 +19,9 @@ class ResetData extends AbstractFixture implements FixtureInterface, OrderedFixt
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
+     *
+     * @throws \League\Flysystem\FileNotFoundException
+     * @throws \League\Flysystem\RootViolationException
      */
     public function load(ObjectManager $manager)
     {
