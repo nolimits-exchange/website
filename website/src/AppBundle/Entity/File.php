@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\ExpressionBuilder;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Files.
@@ -116,7 +117,7 @@ class File
     private $ratings;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users", mappedBy="downloadLog")
+     * @ORM\OneToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileLogs", mappedBy="file")
      */
     private $downloadLog;
 
@@ -441,5 +442,37 @@ class File
     public function getUserFavourites()
     {
         return $this->userFavourites;
+    }
+    
+    /**
+     * @param UserInterface $user
+     *
+     * @return bool
+     */
+    public function isRatedByUser(UserInterface $user): bool
+    {
+        return (bool) $this
+            ->getRatings()
+            ->matching(
+                new Criteria(
+                    (new ExpressionBuilder())->eq('user', $user)
+                )
+            )->count();
+    }
+    
+    /**
+     * @param UserInterface $user
+     *
+     * @return bool
+     */
+    public function isDownloadedByUser(UserInterface $user): bool
+    {
+        return (bool) $this
+            ->getDownloadLog()
+            ->matching(
+                new Criteria(
+                    (new ExpressionBuilder())->eq('user', $user)
+                )
+            )->count();
     }
 }

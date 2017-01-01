@@ -64,8 +64,8 @@ class CoasterController extends Controller
         
         return $this->render('AppBundle:Coaster:index.html.twig', [
             'coaster'    => $coaster,
-            'rated'      => $coaster->getRatings()->contains($this->getUser()),
-            'downloaded' => $coaster->getDownloadLog()->contains($this->getUser()),
+            'rated'      => $coaster->isRatedByUser($this->getUser()),
+            'downloaded' => $coaster->isDownloadedByUser($this->getUser()),
             'ratingForm' => $ratingForm->createView(),
         ]);
     }
@@ -110,7 +110,7 @@ class CoasterController extends Controller
             )
         );
         
-        $response = new Response();
+        $response = new Response($coasterFile->read());
         
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
@@ -118,7 +118,7 @@ class CoasterController extends Controller
         );
         
         $response->headers->set('Content-Disposition', $disposition);
-        $response->setContent($coasterFile->read());
+        $response->headers->set('Content-Type', 'application/octet-stream');
         
         return $response;
     }
