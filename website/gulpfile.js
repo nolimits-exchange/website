@@ -13,7 +13,7 @@ gulp.task('sass', function () {
 
 gulp.task('fonts', function() {
     return gulp.src('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*')
-        .pipe(gulp.dest('./public/fonts/bootstrap'));
+        .pipe(gulp.dest('./html/fonts/bootstrap'));
 });
 
 gulp.task('browserify', function() {
