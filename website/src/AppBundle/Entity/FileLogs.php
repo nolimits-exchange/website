@@ -31,10 +31,7 @@ class FileLogs
     /**
      * @var \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users
      *
-     * @ORM\ManyToOne(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users", inversedBy="downloadLog")
      */
     protected $user;
 

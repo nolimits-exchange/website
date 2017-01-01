@@ -28,8 +28,7 @@ class Users extends User
     protected $files;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File", inversedBy="downloadLog")
-     * @ORM\JoinTable(name="file_logs", joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")})
+     * @ORM\OneToMany(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileLogs", mappedBy="user")
      */
     protected $downloadLog;
 
