@@ -445,11 +445,11 @@ class File
     }
     
     /**
-     * @param UserInterface $user
+     * @param UserInterface|null $user
      *
      * @return bool
      */
-    public function isRatedByUser(UserInterface $user): bool
+    public function isRatedByUser($user): bool
     {
         return (bool) $this
             ->getRatings()
@@ -461,11 +461,11 @@ class File
     }
     
     /**
-     * @param UserInterface $user
+     * @param UserInterface|null $user
      *
      * @return bool
      */
-    public function isDownloadedByUser(UserInterface $user): bool
+    public function isDownloadedByUser($user): bool
     {
         return (bool) $this
             ->getDownloadLog()
