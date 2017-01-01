@@ -37,7 +37,7 @@ class LoadSearchControllerData extends AbstractFixture implements FixtureInterfa
     
         $manager->persist($user);
         
-        $count = 10;
+        $count = 4;
         
         do {
             $form = new Upload();
