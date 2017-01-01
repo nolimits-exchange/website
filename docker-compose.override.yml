@@ -35,3 +35,8 @@ services:
             - db
         environment:
            VIRTUAL_HOST: db.nolimits.docker
+
+    node:
+        image: quay.io/thepixeldeveloper/nolimits-exchange-node
+        volumes:
+            - ./website:/var/www/nolimits
