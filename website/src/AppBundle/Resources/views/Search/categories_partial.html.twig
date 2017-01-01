@@ -24,6 +24,18 @@
             </tr>
             <tr>
                 <td>
+                {{
+                    form_widget(form.author, {
+                        'attr': {
+                            'class': 'input-lg',
+                            'placeholder': 'Username'
+                        }
+                    })
+                }}
+                </td>
+            </tr>
+            <tr>
+                <td>
                     {{
                         form_widget(form.type, {
                             'attr': {

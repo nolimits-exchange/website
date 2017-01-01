@@ -16,6 +16,12 @@ class Search
      * @Assert\Type(type="string")
      */
     protected $term;
+    
+    /**
+     * @var string
+     * @Assert\Type(type="string")
+     */
+    protected $author;
 
     /**
      * @Assert\Type(type="integer")
@@ -208,5 +214,21 @@ class Search
     protected function getSortInverse(string $sort): string
     {
         return $sort === 'asc' ? 'desc' : 'asc';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+    
+    /**
+     * @param string $author
+     */
+    public function setAuthor(string $author)
+    {
+        $this->author = $author;
     }
 }

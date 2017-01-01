@@ -29,10 +29,16 @@ class SearchRepository extends EntityRepository
 
         if ($term = $search->getTerm()) {
             $query
-                ->orderBy('MATCH_AGAINST(s.name) AGAINST (:term)', 'DESC')
+                ->andWhere('MATCH_AGAINST(s.name) AGAINST (:term) > 0')
                 ->setParameter('term', $term);
         }
-
+        
+        if ($author = $search->getAuthor()) {
+            $query
+                ->andWhere('MATCH_AGAINST(s.userUsername) AGAINST (:author) > 0')
+                ->setParameter('author', $author);
+        }
+        
         if ($downloadsSort = $search->getDownloadsSort()) {
             $query->addOrderBy('s.downloads', $downloadsSort);
         } elseif ($ratingsSort = $search->getRatingsSort()) {

@@ -25,6 +25,7 @@ class SearchType extends AbstractType
         $builder
             ->setMethod(Request::METHOD_GET)
             ->add('term', TextType::class, ['required' => false])
+            ->add('author', TextType::class, ['required' => false])
             ->add('type', EntityType::class, [
                 'class'        => 'AppBundle:SearchTypes',
                 'placeholder'  => 'Coaster Type',
