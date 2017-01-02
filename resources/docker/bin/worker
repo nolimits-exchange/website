@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")"
 
-./bin/console jobqueue:listen
+./console jobqueue:listen

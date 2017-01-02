@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")"
 
-./bin/console doctrine:migrations:migrate -n && ./bin/console doctrine:fixtures:load -n --append
+./console doctrine:migrations:migrate -n && ./console doctrine:fixtures:load -n --append
