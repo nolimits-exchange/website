@@ -4,7 +4,7 @@ services:
     web:
         image: quay.io/thepixeldeveloper/nolimits-exchange-web
         volumes:
-            - ./website:/var/www/nolimits
+            - ../../:/var/www/nolimits
 
     db:
         image: mysql:latest

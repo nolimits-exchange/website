@@ -39,4 +39,4 @@ services:
     node:
         image: quay.io/thepixeldeveloper/nolimits-exchange-node
         volumes:
-            - ./website:/var/www/nolimits
+            - ../../:/var/www/nolimits
