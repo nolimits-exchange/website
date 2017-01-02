@@ -21,4 +21,4 @@ services:
         arguments:
             - "@faker.generator"
         tags:
-            - { name: "bazinga_faker.provider" }
+            - { name: bazinga_faker.provider }

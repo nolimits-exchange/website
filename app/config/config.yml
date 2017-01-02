@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.php }
     - { resource: security.yml }
     - { resource: mysql_extensions.yml }
-    - { resource: config_faker.yml }
 
 parameters:
     locale: en
