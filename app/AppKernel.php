@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Oneup\FlysystemBundle\OneupFlysystemBundle(),
-            new Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
             new \Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
@@ -34,6 +33,7 @@ class AppKernel extends Kernel
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[] = new Bazinga\Bundle\FakerBundle\BazingaFakerBundle();
         }
 
         return $bundles;
