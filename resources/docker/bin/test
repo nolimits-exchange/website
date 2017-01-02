@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd "$(dirname "$0")"
+
 args="./vendor/bin/phpunit $@"
 
 docker-compose exec web sh -c "$args"
