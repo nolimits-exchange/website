@@ -15,7 +15,7 @@
   "prefer-stable": true,
   "minimum-stability": "dev",
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.0",
     "symfony/symfony": "@stable",
     "doctrine/orm": "@stable",
     "doctrine/doctrine-bundle": "@stable",
@@ -59,7 +59,7 @@
   "config": {
     "optimize-autoloader": true,
     "platform": {
-      "php": "7.1.0"
+      "php": "7.0"
     }
   },
   "scripts": {
