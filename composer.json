@@ -32,7 +32,6 @@
     "knplabs/knp-markdown-bundle": "@stable",
     "white-october/pagerfanta-bundle": "@stable",
     "oneup/flysystem-bundle": "@stable",
-    "sentry/sentry-symfony": "@stable",
     "beberlei/DoctrineExtensions": "@stable",
     "aws/aws-sdk-php": "@stable",
     "league/flysystem-aws-s3-v3": "@stable",
