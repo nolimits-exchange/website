@@ -5,9 +5,11 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileLogs;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating;
@@ -102,22 +104,29 @@ class CoasterController extends Controller
 
         $filesystem  = $this->get('oneup_flysystem.coasters_filesystem');
         $coasterUtil = $this->get('util.coaster');
-        
+    
+        /**
+         * @var \League\Flysystem\File $coasterFile
+         */
         $coasterFile = $filesystem->get(
             $coasterUtil->getCoasterPath(
                 $coaster->getId(),
                 $coaster->getCoasterExt()
             )
         );
-        
-        $response = new Response($coasterFile->read());
+        $response = new StreamedResponse(
+            function() use ($coasterFile) {
+                $output = fopen('php://output', 'wb');
+                stream_copy_to_stream($coasterFile->readStream(), $output);
+                fclose($output);
+            });
         
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             $coaster->getFilename(),
             $coaster->getFilename($this->get('slugify'))
         );
-        
+    
         $response->headers->set('Content-Disposition', $disposition);
         $response->headers->set('Content-Type', 'application/octet-stream');
         

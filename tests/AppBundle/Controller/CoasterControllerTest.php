@@ -4,6 +4,8 @@ namespace Tests\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\DomCrawler\Crawler;
 
 class CoasterControllerTest extends WebTestCase
 {
@@ -71,10 +73,8 @@ class CoasterControllerTest extends WebTestCase
         ));
         
         $crawler = $this->getCoasterByName($client, 'Flug der Dämonen');
-        
-        $link = $crawler->selectLink('Download')->link();
-        
-        $client->click($link);
+    
+        $this->download($client, $crawler);
     
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
@@ -88,11 +88,24 @@ class CoasterControllerTest extends WebTestCase
         
         $crawler = $this->getCoasterByName($client, 'Fugitive (Updated W/ Scenery)');
         
-        $link = $crawler->selectLink('Download')->link();
-        
-        $client->click($link);
+        $this->download($client, $crawler);
         
         $this->assertTrue($client->getResponse()->isSuccessful());
+    }
+    
+    /**
+     * @param Client  $client
+     * @param Crawler $crawler
+     */
+    protected function download(Client $client, Crawler $crawler)
+    {
+        $link = $crawler->selectLink('Download')->link();
+    
+        ob_start();
+        
+        $client->click($link);
+    
+        ob_end_clean();
     }
     
     /**
