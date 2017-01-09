@@ -34,7 +34,7 @@ class CoasterController extends Controller
             'id'     => $request->get('id'),
             'status' => [File::UPLOADING, File::PUBLISHED]
         ]);
-
+        
         if (!$coaster) {
             throw $this->createNotFoundException();
         }
@@ -114,7 +114,8 @@ class CoasterController extends Controller
         
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $coaster->getFilename()
+            $coaster->getFilename(),
+            $coaster->getFilename($this->get('slugify'))
         );
         
         $response->headers->set('Content-Disposition', $disposition);

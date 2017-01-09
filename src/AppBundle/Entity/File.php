@@ -2,6 +2,7 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity;
 
+use Cocur\Slugify\SlugifyInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -427,13 +428,25 @@ class File
     {
         $this->downloadLog = $downloadLog;
     }
-
+    
     /**
+     * @param SlugifyInterface $slugify
+     *
      * @return string
      */
-    public function getFilename(): string
+    public function getFilename(SlugifyInterface $slugify = null): string
     {
-        return $this->getName().'.'.$this->getCoasterExt();
+        $name = strtr($this->getName(), [
+            '/'  => '_',
+            '\\' => '_',
+        ]);
+        
+        if ($slugify !== null) {
+            return $slugify->slugify($name) . '.' . $this->getCoasterExt();
+        }
+    
+        return $name . '.' . $this->getCoasterExt();
+        
     }
 
     /**

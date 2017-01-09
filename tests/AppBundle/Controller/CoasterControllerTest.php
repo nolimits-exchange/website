@@ -2,6 +2,7 @@
 
 namespace Tests\AppBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CoasterControllerTest extends WebTestCase
@@ -9,11 +10,8 @@ class CoasterControllerTest extends WebTestCase
     public function testCoasterPageLoads()
     {
         $client  = static::createClient();
-        $crawler = $client->request('GET', '/');
-
-        $link = $crawler->selectLink('Test Coaster')->link();
-
-        $client->click($link);
+        
+        $this->getCoasterByName($client, 'Test Coaster');
 
         $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertContains('Test Coaster', $client->getResponse()->getContent());
@@ -26,12 +24,8 @@ class CoasterControllerTest extends WebTestCase
             'PHP_AUTH_USER' => 'coaster-controller-user@example.com',
             'PHP_AUTH_PW'   => 'password',
         ));
-        
-        $crawler = $client->request('GET', '/');
     
-        $link = $crawler->selectLink('Test Coaster')->link();
-    
-        $client->click($link);
+        $this->getCoasterByName($client, 'Test Coaster');
     
         $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertContains('Submit a rating', $client->getResponse()->getContent());
@@ -43,13 +37,8 @@ class CoasterControllerTest extends WebTestCase
             'PHP_AUTH_USER' => 'coaster-controller-user@example.com',
             'PHP_AUTH_PW'   => 'password',
         ));
-        $client->followRedirects();
-    
-        $crawler = $client->request('GET', '/');
-    
-        $link = $crawler->selectLink('Test Coaster')->link();
-    
-        $crawler = $client->click($link);
+        
+        $crawler = $this->getCoasterByName($client, 'Test Coaster');
     
         $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertContains('Submit a rating', $client->getResponse()->getContent());
@@ -72,5 +61,59 @@ class CoasterControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertContains($comment, $client->getResponse()->getContent());
         $this->assertContains('4.50', $client->getResponse()->getContent());
+    }
+    
+    public function testUtf8Download()
+    {
+        $client = static::createClient([], array(
+            'PHP_AUTH_USER' => 'coaster-controller-user@example.com',
+            'PHP_AUTH_PW'   => 'password',
+        ));
+        
+        $crawler = $this->getCoasterByName($client, 'Flug der Dämonen');
+        
+        $link = $crawler->selectLink('Download')->link();
+        
+        $client->click($link);
+    
+        $this->assertTrue($client->getResponse()->isSuccessful());
+    }
+    
+    public function testDownloadWithSlashes()
+    {
+        $client = static::createClient([], array(
+            'PHP_AUTH_USER' => 'coaster-controller-user@example.com',
+            'PHP_AUTH_PW'   => 'password',
+        ));
+        
+        $crawler = $this->getCoasterByName($client, 'Fugitive (Updated W/ Scenery)');
+        
+        $link = $crawler->selectLink('Download')->link();
+        
+        $client->click($link);
+        
+        $this->assertTrue($client->getResponse()->isSuccessful());
+    }
+    
+    /**
+     * @param Client $client
+     * @param string $name
+     *
+     * @return \Symfony\Component\DomCrawler\Crawler
+     */
+    protected function getCoasterByName(Client $client, string $name)
+    {
+        $client->followRedirects();
+    
+        $crawler = $client->request('GET', '/search');
+    
+        $form = $crawler->selectButton('Submit')->form();
+        $form['term'] = $name;
+    
+        $crawler = $client->submit($form);
+    
+        $link = $crawler->selectLink($name)->link();
+        
+        return $client->click($link);
     }
 }
