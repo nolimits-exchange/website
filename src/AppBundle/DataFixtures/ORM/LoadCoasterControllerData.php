@@ -24,14 +24,7 @@ class LoadCoasterControllerData extends AbstractFixture implements FixtureInterf
      */
     public function load(ObjectManager $manager)
     {
-        $user = new Users();
-        $user->setLastLogin(new DateTime());
-        $user->setEnabled(true);
-        $user->setPassword($this->getPassword($user));
-        $user->setUsername('Coaster Controller User');
-        $user->setEmail('coaster-controller-user@example.com');
-    
-        $manager->persist($user);
+        $user = $this->getUser($manager);
         
         $form = new Upload();
         $form->setName('Test Coaster');
@@ -46,6 +39,55 @@ class LoadCoasterControllerData extends AbstractFixture implements FixtureInterf
         $this->container
             ->get('handler.coaster.upload.finished')
             ->handle($coaster);
+        
+        // Bug: The filename fallback must only contain ASCII characters.
+        $form = new Upload();
+        $form->setName('Flug der Dämonen');
+        $form->setDescription($this->container->get('faker.generator')->markdownParagraphs(random_int(1, 5)));
+        $form->setCoaster($this->getCoaster());
+        $form->setScreenshot($this->getScreenshot());
+    
+        $coaster = $this->container
+            ->get('handler.coaster.upload.started')
+            ->handle($form, $user);
+    
+        $this->container
+            ->get('handler.coaster.upload.finished')
+            ->handle($coaster);
+        
+        // Bug: The filename and the fallback cannot contain the "/" and "\" characters.
+        $form = new Upload();
+        $form->setName('Fugitive (Updated W/ Scenery)');
+        $form->setDescription($this->container->get('faker.generator')->markdownParagraphs(random_int(1, 5)));
+        $form->setCoaster($this->getCoaster());
+        $form->setScreenshot($this->getScreenshot());
+    
+        $coaster = $this->container
+            ->get('handler.coaster.upload.started')
+            ->handle($form, $user);
+    
+        $this->container
+            ->get('handler.coaster.upload.finished')
+            ->handle($coaster);
+    }
+    
+    /**
+     * @param ObjectManager $manager
+     *
+     * @return Users
+     */
+    protected function getUser(ObjectManager $manager)
+    {
+        $user = new Users();
+        $user->setLastLogin(new DateTime());
+        $user->setEnabled(true);
+        $user->setPassword($this->getPassword($user));
+        $user->setUsername('Coaster Controller User');
+        $user->setEmail('coaster-controller-user@example.com');
+    
+        $manager->persist($user);
+        
+        return $user;
     }
     
     /**
