@@ -2,7 +2,7 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Form;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -26,13 +26,13 @@ class Upload
 
     /**
      * @Assert\File(maxSize="250M")
-     * @var UploadedFile
+     * @var File
      */
     protected $coaster;
 
     /**
      * @Assert\Image(maxSize="5M")
-     * @var UploadedFile
+     * @var File
      */
     protected $screenshot;
 
@@ -83,7 +83,7 @@ class Upload
     }
 
     /**
-     * @return UploadedFile
+     * @return File
      */
     public function getCoaster()
     {
@@ -93,11 +93,11 @@ class Upload
     /**
      * Coaster upload file.
      *
-     * @param UploadedFile $coaster
+     * @param File $coaster
      *
      * @return $this
      */
-    public function setCoaster(UploadedFile $coaster)
+    public function setCoaster(File $coaster)
     {
         $this->coaster = $coaster;
 
@@ -107,7 +107,7 @@ class Upload
     /**
      * Screenshot upload file.
      *
-     * @return UploadedFile
+     * @return File
      */
     public function getScreenshot()
     {
@@ -117,11 +117,11 @@ class Upload
     /**
      * Screenshot upload file.
      *
-     * @param UploadedFile $screenshot
+     * @param File $screenshot
      *
      * @return $this
      */
-    public function setScreenshot(UploadedFile $screenshot)
+    public function setScreenshot(File $screenshot)
     {
         $this->screenshot = $screenshot;
 
