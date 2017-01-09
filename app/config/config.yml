@@ -122,6 +122,7 @@ services:
         arguments:
             - "@=service('doctrine').getRepository('AppBundle:File')"
             - "@event_dispatcher"
+            - "%object_storage_tmp%/ephemeral"
 
     handler.coaster.upload.finished:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster\UploadFinishedHandler
@@ -139,12 +140,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: coaster.upload.started, priority: 255 }
 
-    listener.coaster.upload.started.move_to_ephemeral:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\MoveToEphemeralListener
-        arguments:
-            - "@app.file_uploader"
-        tags:
-            - { name: kernel.event_listener, event: coaster.upload.started, priority: 200 }
+#    listener.coaster.upload.started.move_to_ephemeral:
+#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\MoveToEphemeralListener
+#        arguments:
+#            - "@app.file_uploader"
+#        tags:
+#            - { name: kernel.event_listener, event: coaster.upload.started, priority: 200 }
 
     listener.coaster.upload.finished.mark_as_published:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Finished\MarkAsPublishedListener

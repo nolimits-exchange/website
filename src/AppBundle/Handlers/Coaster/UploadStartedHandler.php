@@ -22,15 +22,22 @@ class UploadStartedHandler
     protected $eventDispatcher;
     
     /**
+     * @var string
+     */
+    protected $directory;
+    
+    /**
      * UploadStartedHandler constructor.
      *
      * @param FileRepository           $fileRepository
      * @param EventDispatcherInterface $eventDispatcher
+     * @param string                   $directory
      */
-    public function __construct(FileRepository $fileRepository, EventDispatcherInterface $eventDispatcher)
+    public function __construct(FileRepository $fileRepository, EventDispatcherInterface $eventDispatcher, $directory)
     {
         $this->fileRepository = $fileRepository;
         $this->eventDispatcher = $eventDispatcher;
+        $this->directory = $directory;
     }
     
     /**
@@ -55,6 +62,9 @@ class UploadStartedHandler
         $file->setStatus(File::UPLOADING);
     
         $this->fileRepository->save($file);
+        
+        $coaster->move($this->directory, $file->getId() . '.' . $coaster->getClientOriginalExtension());
+        $screenshot->move($this->directory, $file->getId() . '.' . $screenshot->getClientOriginalExtension());
         
         $event = new UploadStartedEvent($upload, $file);
         
