@@ -36,16 +36,12 @@ class FileUploader implements FileUploaderInterface
     public function upload(UploadedFile $file, string $id): string
     {
         $filename = $id . '.' . $file->getClientOriginalExtension();
-
-        $splFile = $file->openFile('r');
+        $stream   = fopen($file->getRealPath(), 'rb+');
         
-        $this->ephemeral->write(
-            $filename,
-            $splFile->fread(
-                $splFile->getSize()
-            )
-        );
-
+        $this->ephemeral->writeStream($filename, $stream);
+        
+        fclose($stream);
+        
         return $filename;
     }
 }
