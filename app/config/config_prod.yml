@@ -17,7 +17,7 @@ monolog:
             type:    group
             members: [error_log, deduplicated]
         error_log:
-                type: error_log
+            type: error_log
         deduplicated:
             type:    deduplication
             handler: swift

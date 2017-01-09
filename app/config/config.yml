@@ -16,6 +16,11 @@ swiftmailer:
     spool:
         type: memory
 
+monolog:
+    handlers:
+        console:
+            type: console
+
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
