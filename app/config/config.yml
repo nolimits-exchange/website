@@ -144,7 +144,7 @@ services:
         arguments:
             - "@app.file_uploader"
         tags:
-            - { name: kernel.event_listener, event: coaster.upload.started, priority: 0 }
+            - { name: kernel.event_listener, event: coaster.upload.started, priority: 200 }
 
     listener.coaster.upload.finished.mark_as_published:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Finished\MarkAsPublishedListener

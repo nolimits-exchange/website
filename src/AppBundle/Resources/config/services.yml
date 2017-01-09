@@ -17,6 +17,7 @@ services:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\FileUploader
         arguments:
             - "@oneup_flysystem.ephemeral_filesystem"
+            - "@logger"
 
     fos_user.user_provider.email:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Security\EmailProvider
