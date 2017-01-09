@@ -6,3 +6,26 @@ framework:
         packages:
             screenshots:
                 base_url: "https://%object_storage_host%/images"
+
+monolog:
+    handlers:
+        mail:
+            type:         fingers_crossed
+            action_level: critical
+            handler:      grouped
+        grouped:
+            type:    group
+            members: [error_log, deduplicated]
+        error_log:
+                type: error_log
+        deduplicated:
+            type:    deduplication
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: 'error@nolimits-exchange.com'
+            to_email:   'thepixeldeveloper@googlemail.com'
+            subject:    'An Error Occurred! %%message%%'
+            level:      debug
+            formatter:  monolog.formatter.html
+            content_type: text/html
