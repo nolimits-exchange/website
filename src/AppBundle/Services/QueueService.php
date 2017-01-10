@@ -12,6 +12,7 @@
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Services;
 
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Process\Process;
 
 class QueueService extends \Heri\Bundle\JobQueueBundle\Service\QueueService
@@ -31,8 +32,13 @@ class QueueService extends \Heri\Bundle\JobQueueBundle\Service\QueueService
             $this->output->writeLn("<fg=yellow> [x] [{$this->queue->getName()}] {$commandName} received</> ");
 
             if (!isset($this->command)) {
+                $console = 'app/console';
+                if (Kernel::VERSION >= 3) {
+                    $console = 'bin/console';
+                }
+                
                 $process = new Process(sprintf('%s %s %s %s',
-                    'php', 'bin/console', $commandName,
+                    'php', $console, $commandName,
                     implode(' ', $arguments)
                 ));
                 $process->setTimeout($this->processTimeout);
@@ -42,7 +48,7 @@ class QueueService extends \Heri\Bundle\JobQueueBundle\Service\QueueService
                     throw new \Exception($process->getErrorOutput());
                 }
 
-                print $process->getOutput();
+                echo $process->getOutput();
             } else {
                 $input = new ArrayInput(array_merge([''], $arguments));
                 $command = $this->command->getApplication()->find($commandName);
@@ -54,6 +60,7 @@ class QueueService extends \Heri\Bundle\JobQueueBundle\Service\QueueService
         } catch (\Exception $e) {
             $this->output->writeLn("<fg=white;bg=red> [!] [{$this->queue->getName()}] FAILURE: {$e->getMessage()}</>");
             $this->adapter->logException($message, $e);
+            $this->logger->critical($e->getMessage(), ['type' => get_class($e)]);
         }
     }
 }
