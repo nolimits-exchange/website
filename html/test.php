@@ -1,3 +1,5 @@
 <?php
 
-phpinfo();
+$dir = scandir('/tmp');
+
+print_r($dir);
