@@ -67,8 +67,8 @@ class UploadStartedHandler
     
         $directory = realpath($this->directory);
         
-        $coaster    = $coaster->move($directory, $file->getId() . '.' . $coaster->getClientOriginalExtension());
-        $screenshot = $screenshot->move($directory, $file->getId() . '.' . $screenshot->getClientOriginalExtension());
+        copy($coaster->getPathname(), $directory . '/' . $file->getId() . '.' . $coaster->getClientOriginalExtension());
+        copy($screenshot->getPathname(), $directory . '/' . $file->getId() . '.' . $screenshot->getClientOriginalExtension());
         
         $event = new UploadStartedEvent($file, $coaster);
         
