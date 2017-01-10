@@ -64,10 +64,10 @@ class UploadStartedHandler
     
         $this->fileRepository->save($file);
         
-        $coaster->move($this->directory, $file->getId() . '.' . $coaster->getClientOriginalExtension());
-        $screenshot->move($this->directory, $file->getId() . '.' . $screenshot->getClientOriginalExtension());
+        $coaster    = $coaster->move($this->directory, $file->getId() . '.' . $coaster->getClientOriginalExtension());
+        $screenshot = $screenshot->move($this->directory, $file->getId() . '.' . $screenshot->getClientOriginalExtension());
         
-        $event = new UploadStartedEvent($upload, $file);
+        $event = new UploadStartedEvent($file, $coaster);
         
         $this->eventDispatcher->dispatch(UploadStartedEvent::NAME, $event);
         

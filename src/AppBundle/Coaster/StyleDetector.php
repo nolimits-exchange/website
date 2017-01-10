@@ -2,7 +2,7 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Coaster;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 class StyleDetector implements StyleDetectorInterface
 {
@@ -22,11 +22,11 @@ class StyleDetector implements StyleDetectorInterface
     }
     
     /**
-     * @param UploadedFile $file
+     * @param File $file
      *
      * @return StyleInterface
      */
-    public function detect(UploadedFile $file)
+    public function detect(File $file)
     {
         foreach ($this->detectors as $detector) {
             if (null !== $result = $detector->detect($file)) {

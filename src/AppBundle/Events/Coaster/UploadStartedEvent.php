@@ -3,8 +3,8 @@
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Events\Coaster;
 
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\HttpFoundation\File\File as CoasterFile;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
 
 /**
  * Class UploadStartedEvent
@@ -21,20 +21,20 @@ class UploadStartedEvent extends Event
     protected $file;
     
     /**
-     * @var Upload
+     * @var CoasterFile
      */
-    protected $uploadForm;
+    protected $coaster;
     
     /**
-     * CoasterUploadingEvent constructor.
+     * UploadStartedEvent constructor.
      *
-     * @param Upload $uploadForm
-     * @param File   $file
+     * @param File        $file
+     * @param CoasterFile $coaster
      */
-    public function __construct(Upload $uploadForm, File $file)
+    public function __construct(File $file, CoasterFile $coaster)
     {
-        $this->uploadForm = $uploadForm;
         $this->file = $file;
+        $this->coaster = $coaster;
     }
     
     /**
@@ -46,10 +46,10 @@ class UploadStartedEvent extends Event
     }
     
     /**
-     * @return Upload
+     * @return CoasterFile
      */
-    public function getUploadForm()
+    public function getCoaster(): CoasterFile
     {
-        return $this->uploadForm;
+        return $this->coaster;
     }
 }

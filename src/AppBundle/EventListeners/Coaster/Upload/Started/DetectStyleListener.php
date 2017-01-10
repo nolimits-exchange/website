@@ -46,7 +46,7 @@ class DetectStyleListener
      */
     public function onCoasterUploadStarted(UploadStartedEvent $event)
     {
-        $coaster = $event->getUploadForm()->getCoaster();
+        $coaster = $event->getCoaster();
         
         $style = $this->styleDetector->detect($coaster);
         
