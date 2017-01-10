@@ -63,16 +63,12 @@ class UploadStartedHandler
         $file->setScreenshotExt($screenshot->getClientOriginalExtension());
         $file->setStatus(File::UPLOADING);
     
-        $logger->critical(print_r(scandir('/tmp'), true));
-    
         $this->fileRepository->save($file);
     
-        $logger->critical(print_r(scandir('/tmp'), true));
+        $directory = realpath($this->directory);
         
-        $coaster    = $coaster->move($this->directory, $file->getId() . '.' . $coaster->getClientOriginalExtension());
-        $screenshot = $screenshot->move($this->directory, $file->getId() . '.' . $screenshot->getClientOriginalExtension());
-    
-        $logger->critical(print_r(scandir('/tmp'), true));
+        $coaster    = $coaster->move($directory, $file->getId() . '.' . $coaster->getClientOriginalExtension());
+        $screenshot = $screenshot->move($directory, $file->getId() . '.' . $screenshot->getClientOriginalExtension());
         
         $event = new UploadStartedEvent($file, $coaster);
         
