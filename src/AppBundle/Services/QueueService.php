@@ -60,7 +60,7 @@ class QueueService extends \Heri\Bundle\JobQueueBundle\Service\QueueService
         } catch (\Exception $e) {
             $this->output->writeLn("<fg=white;bg=red> [!] [{$this->queue->getName()}] FAILURE: {$e->getMessage()}</>");
             $this->adapter->logException($message, $e);
-            $this->logger->critical($e->getMessage(), ['type' => get_class($e)]);
+            $this->logger->critical($e->getMessage(), ['type' => get_class($e), 'trace' => $e->getTraceAsString()]);
         }
     }
 }
