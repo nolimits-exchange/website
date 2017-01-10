@@ -32,7 +32,6 @@ $container->setParameter('object_storage_key',    $secrets['OBJECT_STORAGE']['KE
 $container->setParameter('object_storage_region', $secrets['OBJECT_STORAGE']['REGION']);
 $container->setParameter('object_storage_secret', $secrets['OBJECT_STORAGE']['SECRET']);
 $container->setParameter('object_storage_server', $secrets['OBJECT_STORAGE']['SERVER']);
-$container->setParameter('object_storage_tmp',    '%kernel.root_dir%/../var/tmp/');
 
 $container->setParameter('secret', $secrets['CUSTOM']['COOKIE_SALT']);
 
