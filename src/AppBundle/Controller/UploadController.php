@@ -31,7 +31,7 @@ class UploadController extends Controller
             
             $file = $this
                 ->get('handler.coaster.upload.started')
-                ->handle($upload, $this->getUser());
+                ->handle($upload, $this->getUser(), $logger);
     
             $queue = $this->get('jobqueue')->attach('process_file_upload');
     
