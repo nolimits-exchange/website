@@ -25,6 +25,9 @@ class UploadController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             
+            $this->container->get('logger')
+                ->critical(print_r($upload->getCoaster(), true));
+            
             $file = $this
                 ->get('handler.coaster.upload.started')
                 ->handle($upload, $this->getUser());
