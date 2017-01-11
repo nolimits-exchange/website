@@ -50,7 +50,7 @@ class UploadStartedHandler
      * @return File
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
-    public function handle(Upload $upload, UserInterface $author, Logger $logger): File
+    public function handle(Upload $upload, UserInterface $author): File
     {
         $coaster    = $upload->getCoaster();
         $screenshot = $upload->getScreenshot();
@@ -67,7 +67,7 @@ class UploadStartedHandler
     
         $this->fileRepository->save($file);
     
-        $coaster->move($directory, $file->getId() . '.' . $file->getCoasterExt());
+        $coaster = $coaster->move($directory, $file->getId() . '.' . $file->getCoasterExt());
         $screenshot->move($directory, $file->getId() . '.' . $file->getScreenshotExt());
         
         $event = new UploadStartedEvent($file, $coaster);
