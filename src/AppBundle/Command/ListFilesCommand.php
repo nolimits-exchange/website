@@ -28,7 +28,9 @@ class ListFilesCommand extends Command
     
     protected function configure()
     {
-        //
+        $this
+            ->setName('process:list_files')
+            ->setDescription('Process list files.');
     }
     
     protected function execute(InputInterface $input, OutputInterface $output)
