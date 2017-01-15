@@ -214,6 +214,8 @@ services:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ListFilesCommand
         arguments:
             - "@oneup_flysystem.mount_manager"
+        tags:
+            -  { name: console.command }
 
     app.command.process_file_upload:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ProcessFileUploadCommand
