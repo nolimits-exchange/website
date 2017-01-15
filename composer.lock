@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3ed24d17c64f47a98e468ede5d33d43",
+    "content-hash": "25640b5ccbb3072dd452143c48bbf753",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1479,69 +1479,6 @@
                 "uri"
             ],
             "time": "2016-06-24T23:00:38+00:00"
-        },
-        {
-            "name": "heristop/jobqueue-bundle",
-            "version": "dev-master",
-            "target-dir": "Heri/Bundle/JobQueueBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/heristop/HeriJobQueueBundle.git",
-                "reference": "893656c6fe4a74f191afb1b4d367afc0e559cf4b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/heristop/HeriJobQueueBundle/zipball/893656c6fe4a74f191afb1b4d367afc0e559cf4b",
-                "reference": "893656c6fe4a74f191afb1b4d367afc0e559cf4b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "symfony/console": "~2.7|~3.0",
-                "symfony/finder": "~2.7|~3.0",
-                "symfony/framework-bundle": "~2.7|~3.0",
-                "zendframework/zend-queue": "2.0.*@dev"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.5",
-                "symfony/monolog-bundle": "~2.7|~3.0",
-                "symfony/process": "~2.7|~3.0"
-            },
-            "suggest": {
-                "php-amqplib/php-amqplib": "AMQP library",
-                "react/event-loop": "Event Loop Component",
-                "zendframework/zend-json": "2.0.*"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Heri\\Bundle\\JobQueueBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandre Mogère"
-                }
-            ],
-            "description": "This bundle provides the use of Zend_Queue from Zend Framework. It allows your Symfony application to schedule multiple console commands as server-side jobs.",
-            "keywords": [
-                "doctrine",
-                "job",
-                "queue",
-                "rabbitmq",
-                "symfony"
-            ],
-            "time": "2016-12-01 09:27:15"
         },
         {
             "name": "intervention/image",
@@ -3720,41 +3657,6 @@
                 "zf2"
             ],
             "time": "2016-12-19T21:47:12+00:00"
-        },
-        {
-            "name": "zendframework/zend-queue",
-            "version": "2.0.0rc5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/ZendQueue.git",
-                "reference": "1ecee5fbcd580dabfd3bc098d69bc5501060a7a3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendQueue/zipball/1ecee5fbcd580dabfd3bc098d69bc5501060a7a3",
-                "reference": "1ecee5fbcd580dabfd3bc098d69bc5501060a7a3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "ZendQueue": "library/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "provides a factory function to create specific queue client objects",
-            "homepage": "http://packages.zendframework.com/",
-            "keywords": [
-                "queue",
-                "zf2"
-            ],
-            "time": "2012-08-17T17:33:17+00:00"
         }
     ],
     "packages-dev": [
@@ -5307,7 +5209,6 @@
         "league/flysystem-memory": 0,
         "intervention/image": 0,
         "twig/extensions": 0,
-        "heristop/jobqueue-bundle": 20,
         "thepixeldeveloper/nolimits2packageloader": 0,
         "willdurand/faker-bundle": 0,
         "doctrine/doctrine-fixtures-bundle": 0,

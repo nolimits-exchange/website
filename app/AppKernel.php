@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new \Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new \FOS\UserBundle\FOSUserBundle(),
-            new Heri\Bundle\JobQueueBundle\HeriJobQueueBundle(),
             new AppBundle(),
         );
 

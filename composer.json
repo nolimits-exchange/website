@@ -38,7 +38,6 @@
     "league/flysystem-memory": "@stable",
     "intervention/image": "@stable",
     "twig/extensions": "@stable",
-    "heristop/jobqueue-bundle": "dev-master",
     "thepixeldeveloper/nolimits2packageloader": "@stable"
   },
   "require-dev": {

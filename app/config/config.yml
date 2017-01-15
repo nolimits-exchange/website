@@ -71,11 +71,6 @@ stof_doctrine_extensions:
         default:
             tree: true
 
-heri_job_queue:
-    adapter: "doctrine"
-    queues:
-        - "process_file_upload"
-
 oneup_flysystem:
     adapters:
         former:
