@@ -73,11 +73,6 @@ stof_doctrine_extensions:
 
 oneup_flysystem:
     adapters:
-        former:
-           awss3v3:
-                client: flysystem.s3_client_former
-                bucket: "%former_object_storage_bucket%"
-
         ephemeral:
             local:
                 directory: "%object_storage_tmp%/ephemeral"
@@ -95,10 +90,6 @@ oneup_flysystem:
                 prefix: "images"
 
     filesystems:
-        former:
-            adapter: former
-            mount: former
-
         ephemeral:
             adapter: ephemeral
             mount: ephemeral

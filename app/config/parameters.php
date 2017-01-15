@@ -21,11 +21,6 @@ $container->setParameter('mailer_port',     $secrets['CUSTOM']['EMAIL_PORT']);
 $container->setParameter('mailer_user',     $secrets['CUSTOM']['EMAIL_USER']);
 $container->setParameter('mailer_password', $secrets['CUSTOM']['EMAIL_PASS']);
 
-$container->setParameter('former_object_storage_bucket', $secrets['CUSTOM']['FORMER_BUCKET']);
-$container->setParameter('former_object_storage_key',    $secrets['CUSTOM']['FORMER_KEY']);
-$container->setParameter('former_object_storage_secret', $secrets['CUSTOM']['FORMER_SECRET']);
-$container->setParameter('former_object_storage_region', $secrets['CUSTOM']['FORMER_REGION']);
-
 $container->setParameter('object_storage_bucket', $secrets['OBJECT_STORAGE']['BUCKET']);
 $container->setParameter('object_storage_host',   $secrets['OBJECT_STORAGE']['HOST']);
 $container->setParameter('object_storage_key',    $secrets['OBJECT_STORAGE']['KEY']);

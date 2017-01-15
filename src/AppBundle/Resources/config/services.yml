@@ -1,6 +1,3 @@
-imports:
-    - { resource: commands.yml }
-
 services:
 
     app.doctrine.rating_cache_listener:
@@ -62,14 +59,3 @@ services:
                 version:  "latest"
                 region:   "%object_storage_region%"
                 endpoint: "https://%object_storage_server%"
-
-    flysystem.s3_client_former:
-        class: Aws\S3\S3Client
-        factory: [Aws\S3\S3Client, factory]
-        arguments:
-            -
-                credentials:
-                    key:    "%former_object_storage_key%"
-                    secret: "%former_object_storage_secret%"
-                version:  "latest"
-                region:   "%former_object_storage_region%"
