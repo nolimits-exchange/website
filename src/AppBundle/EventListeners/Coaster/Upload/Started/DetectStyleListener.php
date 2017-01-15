@@ -43,12 +43,18 @@ class DetectStyleListener
     
     /**
      * @param UploadStartedEvent $event
+     *
+     * @return null
      */
     public function onCoasterUploadStarted(UploadStartedEvent $event)
     {
-        $coaster = $event->getCoaster();
+        $coaster = $event->getUpload()->getCoaster();
         
         $style = $this->styleDetector->detect($coaster);
+        
+        if ($style === null) {
+            return;
+        }
         
         $styleEntity = $this->styleRepository->findOneBy([
             'nolimitsId' => $style->getNolimitsId(),

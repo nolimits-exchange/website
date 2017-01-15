@@ -15,6 +15,7 @@ class UploadController extends Controller
      * @Route("/upload", name="upload")
      * @Template
      * @throws \LogicException
+     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
     public function indexAction(Request $request)
     {
@@ -28,15 +29,10 @@ class UploadController extends Controller
             $file = $this
                 ->get('handler.coaster.upload.started')
                 ->handle($upload, $this->getUser());
-    
-            $queue = $this->get('jobqueue')->attach('process_file_upload');
-    
-            $queue->push([
-                'command'  => 'process:file_upload',
-                'argument' => [
-                    'id' => $file->getId()
-                ]
-            ]);
+            
+            $this
+                ->get('handler.coaster.upload.finished')
+                ->handle($file);
 
             return $this->redirectToRoute('coaster', [
                 'id'   => $file->getId(),

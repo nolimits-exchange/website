@@ -6,7 +6,7 @@ imports:
 parameters:
     locale: en
     jobqueue.service.class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\QueueService
-    object_storage_tmp: "/tmp"
+    object_storage_tmp: "%kernel.root_dir%/../var/tmp"
 
 swiftmailer:
     transport: "%mailer_transport%"
@@ -85,7 +85,7 @@ oneup_flysystem:
 
         ephemeral:
             local:
-                directory: "%object_storage_tmp%"
+                directory: "%object_storage_tmp%/ephemeral"
 
         coasters:
             awss3v3:
@@ -123,7 +123,6 @@ services:
         arguments:
             - "@=service('doctrine').getRepository('AppBundle:File')"
             - "@event_dispatcher"
-            - "%object_storage_tmp%"
 
     handler.coaster.upload.finished:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster\UploadFinishedHandler
@@ -141,12 +140,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: coaster.upload.started, priority: 255 }
 
-#    listener.coaster.upload.started.move_to_ephemeral:
-#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\MoveToEphemeralListener
-#        arguments:
-#            - "@app.file_uploader"
-#        tags:
-#            - { name: kernel.event_listener, event: coaster.upload.started, priority: 200 }
+    listener.coaster.upload.started.move_to_ephemeral:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Started\MoveToEphemeralListener
+        arguments:
+            - "@app.file_uploader"
+        tags:
+            - { name: kernel.event_listener, event: coaster.upload.started, priority: 200 }
 
     listener.coaster.upload.finished.mark_as_published:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\EventListeners\Coaster\Upload\Finished\MarkAsPublishedListener
@@ -164,28 +163,9 @@ services:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Coaster\StyleDetector\Nolimits2Detector
         public: false
 
-#    faker.provider.repeating_characters:
-#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Generators\RepeatingCharactersGenerator
-#        arguments: [@faker.generator]
-#        tags:
-#            - { name: bazinga_faker.provider }
-#
-#    nolimits.spam_matcher.repeating:
-#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Matchers\RepeatingCharactersMatcher
-#        tags:
-#            - { name: nolimits.spam_matcher }
-#
     nolimits.spam_classifier:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Classifier
 
-#    nolimits.file_ratings_repository:
-#        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Repository\FileRatingRepository
-#        factory_service: doctrine.orm.default_entity_manager
-#        factory_method: getRepository
-#        arguments:
-#            - Nolimits\AppBundle\Entity\FileRating
-#
-#
     nolimits.file_ratings_test_spam_command:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\SpamCommentsCommand
         arguments:
@@ -209,21 +189,6 @@ services:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Utils\ScreenshotUtil
         arguments:
             - "@util.string"
-
-    app.command.list_files:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ListFilesCommand
-        arguments:
-            - "@oneup_flysystem.mount_manager"
-        tags:
-            -  { name: console.command }
-
-    app.command.process_file_upload:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ProcessFileUploadCommand
-        arguments:
-            - "@=service('doctrine').getRepository('AppBundle:File')"
-            - "@handler.coaster.upload.finished"
-        tags:
-            -  { name: console.command }
 
     upload_screenshot_service:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\UploadScreenshotService

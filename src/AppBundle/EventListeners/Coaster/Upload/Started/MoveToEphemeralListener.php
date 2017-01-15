@@ -27,11 +27,11 @@ class MoveToEphemeralListener
      */
     public function onCoasterUploadStarted(UploadStartedEvent $event)
     {
-        //$coaster    = $event->getUploadForm()->getCoaster();
-        //$screenshot = $event->getUploadForm()->getScreenshot();
-        //$file       = $event->getFile();
-        //
-        //$this->fileUploader->upload($coaster, $file->getId());
-        //$this->fileUploader->upload($screenshot, $file->getId());
+        $coaster    = $event->getUpload()->getCoaster();
+        $screenshot = $event->getUpload()->getScreenshot();
+        $file       = $event->getFile();
+        
+        $this->fileUploader->upload($coaster, $file->getId());
+        $this->fileUploader->upload($screenshot, $file->getId());
     }
 }

@@ -24,22 +24,15 @@ class UploadStartedHandler
     protected $eventDispatcher;
     
     /**
-     * @var string
-     */
-    protected $directory;
-    
-    /**
      * UploadStartedHandler constructor.
      *
      * @param FileRepository           $fileRepository
      * @param EventDispatcherInterface $eventDispatcher
-     * @param string                   $directory
      */
-    public function __construct(FileRepository $fileRepository, EventDispatcherInterface $eventDispatcher, $directory)
+    public function __construct(FileRepository $fileRepository, EventDispatcherInterface $eventDispatcher)
     {
-        $this->fileRepository = $fileRepository;
+        $this->fileRepository  = $fileRepository;
         $this->eventDispatcher = $eventDispatcher;
-        $this->directory = $directory;
     }
     
     /**
@@ -49,14 +42,11 @@ class UploadStartedHandler
      * @param UserInterface $author
      *
      * @return File
-     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
     public function handle(Upload $upload, UserInterface $author): File
     {
         $coaster    = $upload->getCoaster();
         $screenshot = $upload->getScreenshot();
-        
-        $directory = realpath($this->directory);
         
         $file = new File();
         $file->setName($upload->getName());
@@ -68,10 +58,7 @@ class UploadStartedHandler
     
         $this->fileRepository->save($file);
         
-        $coaster = $coaster->move($directory, $file->getId() . '.' . $file->getCoasterExt());
-        $screenshot->move($directory, $file->getId() . '.' . $file->getScreenshotExt());
-        
-        $event = new UploadStartedEvent($file, $coaster);
+        $event = new UploadStartedEvent($file, $upload);
         
         $this->eventDispatcher->dispatch(UploadStartedEvent::NAME, $event);
         

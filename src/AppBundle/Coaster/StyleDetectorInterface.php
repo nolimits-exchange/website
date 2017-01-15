@@ -2,9 +2,9 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Coaster;
 
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface StyleDetectorInterface
 {
-    public function detect(File $file);
+    public function detect(UploadedFile $file);
 }
