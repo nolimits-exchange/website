@@ -59,7 +59,7 @@ class UploadCoasterService extends UploadService
     
             $coastersFile = fopen('s3://' . $coastersFs->getBucket() . '/' . $coastersFs->getPathPrefix() . $dest, 'wb');
     
-            stream_copy_to_stream($ephemeralFile, $coastersFile);
+            stream_copy_to_stream($ephemeralFile['stream'], $coastersFile);
     
             fclose($coastersFile);
     
