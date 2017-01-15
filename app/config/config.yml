@@ -210,6 +210,11 @@ services:
         arguments:
             - "@util.string"
 
+    app.command.list_files:
+        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ListFilesCommand
+        arguments:
+            - "@oneup_flysystem.mount_manager"
+
     app.command.process_file_upload:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\ProcessFileUploadCommand
         arguments:
