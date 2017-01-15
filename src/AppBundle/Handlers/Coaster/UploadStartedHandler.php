@@ -4,6 +4,7 @@ namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster;
 
 use FOS\UserBundle\Model\UserInterface;
 use Monolog\Logger;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Upload;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -68,7 +69,7 @@ class UploadStartedHandler
         $this->fileRepository->save($file);
         
         $umask = umask(0);
-    
+        
         $coaster = $coaster->move($directory, $file->getId() . '.' . $file->getCoasterExt());
         $screenshot->move($directory, $file->getId() . '.' . $file->getScreenshotExt());
         

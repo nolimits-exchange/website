@@ -6,7 +6,7 @@ imports:
 parameters:
     locale: en
     jobqueue.service.class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\QueueService
-    object_storage_tmp: "%kernel.root_dir%/../uploads/"
+    object_storage_tmp: "/tmp/uploads/"
 
 swiftmailer:
     transport: "%mailer_transport%"

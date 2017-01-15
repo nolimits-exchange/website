@@ -8,9 +8,9 @@ echo "Umask";
 
 var_dump(sprintf('%o', umask()));
 
-echo "var/tmp/ephemeral directory listing";
+echo "/tmp";
 
-$directory = __DIR__ . '/../uploads';
+$directory = '/tmp';
 
 $files = array_diff(
     scandir($directory), ['.', '..']
