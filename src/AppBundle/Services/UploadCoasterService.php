@@ -38,11 +38,8 @@ class UploadCoasterService extends UploadService
     {
         $source = $this->getSourceName($id, $ext);
         $dest   = $this->coasterUtil->getCoasterPath($id, $ext);
-    
-        $ephemeralFs   = $this->mountManager->getAdapter('ephemeral://');
-        $ephemeralFile = $ephemeralFs->readStream($source);
         
-        $coastersFs    = $this->mountManager->getAdapter('coasters://');
+        $coastersFs = $this->mountManager->getAdapter('coasters://');
         
         if ($coastersFs instanceof Local) {
             $this->mountManager->move(
@@ -51,7 +48,6 @@ class UploadCoasterService extends UploadService
             );
             
             return 0;
-        
         }
         
         if ($coastersFs instanceof AwsS3Adapter) {
@@ -59,7 +55,10 @@ class UploadCoasterService extends UploadService
     
             $coastersFile = fopen('s3://' . $coastersFs->getBucket() . '/' . $coastersFs->getPathPrefix() . $dest, 'wb');
     
-            stream_copy_to_stream($ephemeralFile['stream'], $coastersFile);
+            stream_copy_to_stream(
+                $this->mountManager->readStream('ephemeral://' . $source),
+                $coastersFile
+            );
     
             fclose($coastersFile);
     
