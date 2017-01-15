@@ -149,17 +149,6 @@ services:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Coaster\StyleDetector\Nolimits2Detector
         public: false
 
-    nolimits.spam_classifier:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Spam\Classifier
-
-    nolimits.file_ratings_test_spam_command:
-        class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Command\SpamCommentsCommand
-        arguments:
-            - "@nolimits.spam_classifier"
-            - "@=service('doctrine').getRepository('AppBundle:FileRating')"
-        tags:
-            - { name: console.command }
-
     coaster_styles:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\CoasterStyles
 
