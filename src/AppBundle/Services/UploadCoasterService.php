@@ -2,6 +2,8 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Services;
 
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Utils\CoasterUtil;
 
 /**
@@ -36,12 +38,32 @@ class UploadCoasterService extends UploadService
     {
         $source = $this->getSourceName($id, $ext);
         $dest   = $this->coasterUtil->getCoasterPath($id, $ext);
-
-        $this->mountManager->move(
-            'ephemeral://' . $source,
-            'coasters://' . $dest
-        );
-
-        return 0;
+    
+        $ephemeralFs   = $this->mountManager->getAdapter('ephemeral://');
+        $ephemeralFile = $ephemeralFs->readStream($source);
+        
+        $coastersFs    = $this->mountManager->getAdapter('coasters://');
+        
+        if ($coastersFs instanceof Local) {
+            $this->mountManager->move(
+                'ephemeral://' . $source,
+                'coasters://' . $dest
+            );
+            
+            return 0;
+        
+        }
+        
+        if ($coastersFs instanceof AwsS3Adapter) {
+            $coastersFs->getClient()->registerStreamWrapper();
+    
+            $coastersFile = fopen('s3://' . $coastersFs->getBucket() . '/' . $coastersFs->getPathPrefix() . $dest, 'wb');
+    
+            stream_copy_to_stream($ephemeralFile, $coastersFile);
+    
+            fclose($coastersFile);
+    
+            return 0;
+        }
     }
 }
