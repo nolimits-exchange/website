@@ -53,7 +53,7 @@ class UploadCoasterService extends UploadService
         if ($coastersFs instanceof AwsS3Adapter) {
             $coastersFs->getClient()->registerStreamWrapper();
     
-            $coastersFile = fopen('s3://' . $coastersFs->getBucket() . '/' . $coastersFs->getPathPrefix() . $dest, 'wb');
+            $coastersFile = fopen('s3://' . $coastersFs->getBucket() . '/' . $coastersFs->getPathPrefix() . $dest, 'w');
     
             stream_copy_to_stream(
                 $this->mountManager->readStream('ephemeral://' . $source),
