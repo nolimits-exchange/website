@@ -3,8 +3,6 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
-umask(0002);
-
 $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
