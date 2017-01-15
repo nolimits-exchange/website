@@ -10,7 +10,7 @@ var_dump(sprintf('%o', umask()));
 
 echo "var/tmp/ephemeral directory listing";
 
-$directory = __DIR__ . '/../var/tmp/ephemeral';
+$directory = __DIR__ . '/../uploads';
 
 $files = array_diff(
     scandir($directory), ['.', '..']

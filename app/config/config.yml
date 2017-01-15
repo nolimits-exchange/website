@@ -6,7 +6,7 @@ imports:
 parameters:
     locale: en
     jobqueue.service.class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Services\QueueService
-    object_storage_tmp: "%kernel.root_dir%/../var/tmp"
+    object_storage_tmp: "%kernel.root_dir%/../uploads/"
 
 swiftmailer:
     transport: "%mailer_transport%"
@@ -85,7 +85,7 @@ oneup_flysystem:
 
         ephemeral:
             local:
-                directory: "%object_storage_tmp%/ephemeral"
+                directory: "%object_storage_tmp%"
 
         coasters:
             awss3v3:
@@ -123,7 +123,7 @@ services:
         arguments:
             - "@=service('doctrine').getRepository('AppBundle:File')"
             - "@event_dispatcher"
-            - "%object_storage_tmp%/ephemeral"
+            - "%object_storage_tmp%"
 
     handler.coaster.upload.finished:
         class: Thepixeldeveloper\Nolimitsexchange\AppBundle\Handlers\Coaster\UploadFinishedHandler
