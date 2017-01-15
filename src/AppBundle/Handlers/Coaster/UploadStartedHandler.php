@@ -68,12 +68,8 @@ class UploadStartedHandler
     
         $this->fileRepository->save($file);
         
-        $umask = umask(0);
-        
         $coaster = $coaster->move($directory, $file->getId() . '.' . $file->getCoasterExt());
         $screenshot->move($directory, $file->getId() . '.' . $file->getScreenshotExt());
-        
-        umask($umask);
         
         $event = new UploadStartedEvent($file, $coaster);
         
