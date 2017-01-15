@@ -1303,4 +1303,3 @@ return $clientIps ? array_reverse($clientIps) : array($firstTrustedIp);
 }
 }
 namespace {require __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ClassCollectionLoader.php';}
-namespace {require __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/ClassLoader/ApcClassLoader.php';}
