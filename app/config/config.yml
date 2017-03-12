@@ -79,13 +79,13 @@ oneup_flysystem:
         coasters:
             awss3v3:
                 client: flysystem.s3_client
-                bucket: "%env(OBJECT_STORAGE_BUCKET)%"
+                bucket: "%object_storage_bucket%"
                 prefix: "private/files"
 
         screenshots:
             awss3v3:
                 client: flysystem.s3_client
-                bucket: "%env(OBJECT_STORAGE_BUCKET)%"
+                bucket: "%object_storage_bucket%"
                 prefix: "images"
 
     filesystems:

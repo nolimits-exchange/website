@@ -9,6 +9,8 @@ $secrets = json_decode(file_get_contents($_SERVER['APP_SECRETS']), true);
  */
 $container->setParameter('secret', $secrets['CUSTOM']['COOKIE_SALT']);
 
+$container->setParameter('object_storage_bucket', '%env(OBJECT_STORAGE_BUCKET)%');
+
 $container->setParameter('locale', 'en');
 
 $container->setParameter('debug_toolbar',   getenv('SYMFONY_ENV') === 'dev');
