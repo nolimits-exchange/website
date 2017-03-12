@@ -1,0 +1,84 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ user.username }} - A Nolimits Coaster 2 Community{% endblock %}
+
+{% import _self as profile %}
+
+{% macro coasters(files) %}
+    <table class="table table-condensed table-responsive table-coasters">
+        <thead>
+        <tr>
+            <th colspan="2"></th>
+            <th>Style</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+            <tr>
+                <td class="coaster-screenshot">
+                    <img src="{{ asset(screenshot_path(file.id, file.screenshotExt, 'thumbnail'), 'screenshots') }}"
+                         alt="{{ file.name }} }}">
+                </td>
+                <td>
+                    <a href="{{ path('coaster', {id: file.id, slug: file.name | slugify}) }}"
+                       title="{{ file.name }}">
+                        <h4 class="coaster-name">{{ file.name }}</h4>
+                    </a>
+                </td>
+                <td class="coaster-style">
+                    <a href="{{ path('search', app.request.query | merge({ type: file.style.id })) }}">{{ file.style.name }}</a>
+                </td>
+                <td class="rating text-center">
+                    {{ file.rating | number_format(2) }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>{{ user.username }}</h1>
+                </div>
+                <div class="panel-body">
+                    I've uploaded {{ user.files.count }} and downloaded {{ user.downloadLog.count }} roller coasters and written {{ user.ratings.count }} ratings.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel{% if user.files.count %} panel-search{% endif %} panel-page">
+                <div class="panel-heading">
+                    <h1><a href="{{ path('search', {author: user.username}) }}">Uploads</a></h1>
+                </div>
+                <div class="panel-body">
+                    {% if user.files.count %}
+                        {{ profile.coasters(user.files) }}
+                    {% else %}
+                        <p>{{ user.username }} hasn't uploaded anything; Sad times.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>Favourites</h1>
+                </div>
+                <div class="panel-body">
+                    {% if user.fileFavourites.count %}
+                        {{ profile.coasters(user.fileFavourites) }}
+                    {% else %}
+                        <p>{{ user.username }} hasn't made any roller coasters their favourite.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
