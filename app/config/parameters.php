@@ -13,13 +13,6 @@ $container->setParameter('mailer_port',     $secrets['CUSTOM']['EMAIL_PORT']);
 $container->setParameter('mailer_user',     $secrets['CUSTOM']['EMAIL_USER']);
 $container->setParameter('mailer_password', $secrets['CUSTOM']['EMAIL_PASS']);
 
-$container->setParameter('object_storage_bucket', $secrets['OBJECT_STORAGE']['BUCKET']);
-$container->setParameter('object_storage_host',   $secrets['OBJECT_STORAGE']['HOST']);
-$container->setParameter('object_storage_key',    $secrets['OBJECT_STORAGE']['KEY']);
-$container->setParameter('object_storage_region', $secrets['OBJECT_STORAGE']['REGION']);
-$container->setParameter('object_storage_secret', $secrets['OBJECT_STORAGE']['SECRET']);
-$container->setParameter('object_storage_server', $secrets['OBJECT_STORAGE']['SERVER']);
-
 $container->setParameter('secret', $secrets['CUSTOM']['COOKIE_SALT']);
 
 $container->setParameter('locale', 'en');
