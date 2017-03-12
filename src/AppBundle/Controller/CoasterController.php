@@ -2,18 +2,19 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Rate;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileLogs;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Rate;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\RateType;
 
 /**
@@ -108,12 +109,26 @@ class CoasterController extends Controller
         /**
          * @var \League\Flysystem\File $coasterFile
          */
-        $coasterFile = $filesystem->get(
-            $coasterUtil->getCoasterPath(
-                $coaster->getId(),
-                $coaster->getCoasterExt()
-            )
-        );
+        $legacy = 75;
+        
+        if ($coaster->getId() > $legacy) {
+            $coasterFile = $filesystem->get(
+                $coasterUtil->getCoasterPath(
+                    $coaster->getId(),
+                    $coaster->getCoasterExt()
+                )
+            );
+        } else {
+            $coasterFile = $filesystem->get(
+                sprintf('/coasters/%s.%s',
+                    $this->get('slugify')->slugify(
+                        $coaster->getName()
+                    ),
+                    $coaster->getCoasterExt()
+                )
+            );
+        }
+        
         $response = new StreamedResponse(
             function() use ($coasterFile) {
                 $output = fopen('php://output', 'wb');
