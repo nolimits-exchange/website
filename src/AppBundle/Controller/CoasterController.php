@@ -2,19 +2,25 @@
 
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use InvalidArgumentException;
+use UnexpectedValueException;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Rate;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\File;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileLogs;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\FileRating;
-use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Rate;
 use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\RateType;
+
 
 /**
  * Class CoasterController
@@ -71,17 +77,18 @@ class CoasterController extends Controller
             'ratingForm' => $ratingForm->createView(),
         ]);
     }
-
+    
     /**
      * @Route("/coaster/{slug}/{id}/download", name="coaster_download")
      * @Security("has_role('ROLE_USER')")
      *
-     * @param Request  $request
+     * @param Request $request
      *
      * @return Response
+     * @throws HttpException
      *
-     * @throws \UnexpectedValueException
-     * @throws \InvalidArgumentException
+     * @throws UnexpectedValueException
+     * @throws InvalidArgumentException
      */
     public function downloadAction(Request $request)
     {
@@ -104,16 +111,34 @@ class CoasterController extends Controller
 
         $filesystem  = $this->get('oneup_flysystem.coasters_filesystem');
         $coasterUtil = $this->get('util.coaster');
+        $slugify     = $this->get('slugify');
     
-        /**
-         * @var \League\Flysystem\File $coasterFile
-         */
-        $coasterFile = $filesystem->get(
+        
+        $paths = [
             $coasterUtil->getCoasterPath(
                 $coaster->getId(),
                 $coaster->getCoasterExt()
+            ),
+            sprintf('/coasters/%s.%s',
+                $slugify->slugify($coaster->getName()),
+                $coaster->getCoasterExt()
             )
-        );
+        ];
+        
+        foreach ($paths as $path) {
+            if ($filesystem->has($path)) {
+                /**
+                 * @var \League\Flysystem\File $coasterFile
+                 */
+                $coasterFile = $filesystem->get($path);
+                break;
+            }
+        }
+        
+        if (!isset($coasterFile)) {
+            throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        
         $response = new StreamedResponse(
             function() use ($coasterFile) {
                 $output = fopen('php://output', 'wb');
