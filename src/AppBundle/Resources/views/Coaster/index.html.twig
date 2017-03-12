@@ -76,7 +76,7 @@
                     <td><a href="{{ url('search') }}?type={{ coaster.style.id | e('html_attr') }}">{{ coaster.style.name }}</a></td>
                 </tr>
                 <tr>
-                    <td class="padded"><strong>Author: </strong> {{ coaster.author.username }}</td>
+                    <td><a href="{{ path('profile_show', {id: coaster.author.id }) }}"><strong>Author: </strong> {{ coaster.author.username }}</a></td>
                 </tr>
                 <tr>
                     <td class="padded"><strong>Uploaded: </strong>{{ coaster.dateAdded | time_diff }}</td>
