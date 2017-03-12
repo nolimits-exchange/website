@@ -5,7 +5,7 @@ framework:
     assets:
         packages:
             screenshots:
-                base_url: "https://%env(OBJECT_STORAGE_HOST)%/images"
+                base_url: "https://%object_storage_host%/images"
 
 monolog:
     handlers:

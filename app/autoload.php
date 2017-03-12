@@ -23,9 +23,27 @@ try {
 }
 
 $dotenv->required([
-    'APP_SECRETS',
     'APP_NAME',
+    'APP_SECRET',
+    
     'SYMFONY_ENV',
+
+    'MYSQL_DATABASE',
+    'MYSQL_HOST',
+    'MYSQL_PASSWORD',
+    'MYSQL_PORT',
+    'MYSQL_USER',
+    
+    'OBJECT_STORAGE_BUCKET',
+    'OBJECT_STORAGE_KEY',
+    'OBJECT_STORAGE_REGION',
+    'OBJECT_STORAGE_SECRET',
+    'OBJECT_STORAGE_SERVER',
+    
+    'EMAIL_HOST',
+    'EMAIL_PASS',
+    'EMAIL_PORT',
+    'EMAIL_USER',
 ]);
 
 return $loader;

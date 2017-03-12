@@ -3,7 +3,6 @@
 /.sass-cache/
 /node_modules
 .env
-.secrets.json
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 !var/tmp/.gitkeep
