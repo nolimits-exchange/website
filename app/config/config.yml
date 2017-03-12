@@ -8,11 +8,11 @@ parameters:
     object_storage_tmp: "%kernel.root_dir%/../var/tmp"
 
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    port:      "%mailer_port%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: "smtp"
+    host:      "%env(EMAIL_HOST)%"
+    port:      "%env(EMAIL_PORT)%"
+    username:  "%env(EMAIL_USER)%"
+    password:  "%env(EMAIL_PASS)%"
     spool:
         type: memory
 
