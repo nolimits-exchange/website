@@ -28,11 +28,11 @@ twig:
 doctrine:
     dbal:
         driver:   pdo_mysql
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
+        host:     "%env(MYSQL_HOST)%"
+        port:     "%env(MYSQL_PORT)%"
+        dbname:   "%env(MYSQL_DATABASE)%"
+        user:     "%env(MYSQL_USER)%"
+        password: "%env(MYSQL_PASSWORD)%"
         charset:  UTF8
 
     orm:
