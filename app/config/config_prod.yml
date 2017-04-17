@@ -7,6 +7,18 @@ framework:
             screenshots:
                 base_url: "https://%object_storage_host%/images"
 
+doctrine:
+    orm:
+        metadata_cache_driver:
+            type: apcu
+        query_cache_driver:
+            type: apcu
+        result_cache_driver:
+            type: apcu
+        second_level_cache:
+            region_cache_driver:
+                type: apcu
+
 monolog:
     handlers:
         mail:
