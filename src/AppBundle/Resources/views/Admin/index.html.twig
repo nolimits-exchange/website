@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Admin - Nolimits Exchange{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-search panel-page">
+                <div class="panel-heading">
+                    <h1>News Editor</h1>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-responsive table-coasters">
+                        <tbody>
+                        {% for article in articles %}
+                            <tr>
+                                <td>
+                                    <h4><a href="{{ path('admin_news_edit', {id: article.id}) }}">{{ article.name }}</a></h4>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Editing {{ page.article.name }} - Nolimits Exchange{% endblock %}
+
+{% form_theme form with [_self, 'bootstrap_3_layout.html.twig'] %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-search panel-page">
+                <div class="panel-heading">
+                    <h1><a href="{{ path('admin_news_edit', {id: page.article.id}) }}">Back</a> - Page Editor</h1>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-responsive table-coasters">
+                        <tbody>
+                        {% for page in page.article.pages %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('admin_news_edit_page', {id: page.id}) }}">
+                                        <h4 class="coaster-name">{{ page.name }}</h4>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1>Page Contents</h1>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form, { 'attr': { 'id': 'upload-form'}}) }}
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.name, { 'attr': { 'class': 'input-lg'}}) }}
+                    {{ form_row(form.content, { 'attr': { 'rows': '20'}}) }}
+
+                    {{ form_row(form.update, { 'attr': { 'class': 'btn-primary btn-lg pull-right'} }) }}
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
