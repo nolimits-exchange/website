@@ -29,6 +29,12 @@ services:
         ports:
             - 13306:3306
 
+    s3:
+        image: lphoward/fake-s3
+        environment:
+            VIRTUAL_HOST: s3.nolimits.docker
+            VIRTUAL_PORT: 4569
+
     pma:
         image: phpmyadmin/phpmyadmin:latest
         links:
