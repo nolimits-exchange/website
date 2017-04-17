@@ -72,7 +72,7 @@ class FileRating
     /**
      * @var \Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users
      *
-     * @ORM\ManyToOne(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users")
+     * @ORM\ManyToOne(targetEntity="Thepixeldeveloper\Nolimitsexchange\AppBundle\Entity\Users", inversedBy="ratings")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
