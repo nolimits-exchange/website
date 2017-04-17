@@ -72,6 +72,11 @@
                 <tr>
                     <td><a href="{{ path('coaster_download', { id: coaster.id, slug: coaster.name | slugify })}}" class="btn btn-success btn-large"><span class="glyphicon glyphicon-download"></span>Download</a></td>
                 </tr>
+                {% if app.user == coaster.author %}
+                <tr>
+                    <td><a href="{{ path('coaster_edit', { id: coaster.id, slug: coaster.name | slugify })}}" class="btn btn-info btn-large"><span class="glyphicon glyphicon-edit"></span>Edit</a></td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td><a href="{{ url('search') }}?type={{ coaster.style.id | e('html_attr') }}">{{ coaster.style.name }}</a></td>
                 </tr>

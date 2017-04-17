@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Edit {{ coaster.name }} - Nolimits Exchange{% endblock %}
+
+{% form_theme form with [_self, 'bootstrap_3_layout.html.twig'] %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-page">
+                <div class="panel-heading">
+                    <h1><a href="{{ url('coaster', { slug: coaster.name | slugify, id: coaster.id }) }}">Back</a> - Editing {{ coaster.name }}</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                            {{ form_start(form, { 'attr': { 'id': 'upload-form'}}) }}
+                            {{ form_errors(form) }}
+
+                            {{ form_row(form.name, { 'attr': { 'class': 'input-lg'}}) }}
+                            {{ form_row(form.description, { 'attr': { 'rows': '15'}}) }}
+
+                            {{ form_row(form.edit, { 'attr': { 'class': 'btn-primary btn-lg pull-right'} }) }}
+
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

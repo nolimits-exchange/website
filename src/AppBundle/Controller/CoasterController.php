@@ -3,6 +3,9 @@
 namespace Thepixeldeveloper\Nolimitsexchange\AppBundle\Controller;
 
 use InvalidArgumentException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Edit;
+use Thepixeldeveloper\Nolimitsexchange\AppBundle\Form\Type\EditType;
 use UnexpectedValueException;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -76,6 +79,52 @@ class CoasterController extends Controller
             'downloaded' => $coaster->isDownloadedByUser($this->getUser()),
             'ratingForm' => $ratingForm->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/coaster/{slug}/{id}/edit", name="coaster_edit")
+     * @param Request $request
+     * @Template
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function editAction(Request $request)
+    {
+        $file = $this->getDoctrine()->getRepository('AppBundle:File')->findOneBy([
+            'id'     => $request->get('id'),
+            'status' => [File::UPLOADING, File::PUBLISHED],
+            'author' => $this->getUser(),
+        ]);
+
+        if (!$file) {
+            throw $this->createNotFoundException();
+        }
+
+        $upload = new Edit();
+        $upload->setDescription($file->getDescription());
+        $upload->setName($file->getName());
+
+        $form = $this->createForm(EditType::class, $upload);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $file->setName($form->getData()->getName());
+            $file->setDescription($form->getData()->getDescription());
+
+            $this->get('doctrine')
+                ->getRepository('AppBundle:File')
+                ->save($file);
+
+            return $this->redirectToRoute('coaster_edit', [
+                'id'   => $file->getId(),
+                'slug' => $this->get('slugify')->slugify($file->getName()),
+            ]);
+        }
+
+        return [
+            'form'    => $form->createView(),
+            'coaster' => $file,
+        ];
     }
     
     /**
