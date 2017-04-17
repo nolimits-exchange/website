@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5160ddbafa4869df19f3151381553f34",
+    "content-hash": "fd59d3e9f9f3c8345a87445ff98a1ee6",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3555,6 +3555,51 @@
                 "nolimits coaster 2"
             ],
             "time": "2015-12-25T19:01:00+00:00"
+        },
+        {
+            "name": "thepixeldeveloper/sitemap",
+            "version": "4.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ThePixelDeveloper/Sitemap.git",
+                "reference": "bfb14b6067f7a95e7c60acb3e56ce50b9c42ed10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ThePixelDeveloper/Sitemap/zipball/bfb14b6067f7a95e7c60acb3e56ce50b9c42ed10",
+                "reference": "bfb14b6067f7a95e7c60acb3e56ce50b9c42ed10",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thepixeldeveloper\\Sitemap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathew Davies",
+                    "email": "thepixeldeveloper@googlemail.com",
+                    "homepage": "http://mathew-davies.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "XML sitemap generation",
+            "keywords": [
+                "Sitemap",
+                "xml"
+            ],
+            "time": "2017-02-20T09:01:55+00:00"
         },
         {
             "name": "twig/extensions",

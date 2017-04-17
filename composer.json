@@ -39,7 +39,8 @@
     "intervention/image": "@stable",
     "twig/extensions": "@stable",
     "thepixeldeveloper/nolimits2packageloader": "@stable",
-    "roave/security-advisories": "dev-master"
+    "roave/security-advisories": "dev-master",
+    "thepixeldeveloper/sitemap": "^4.5"
   },
   "require-dev": {
     "willdurand/faker-bundle": "@stable",
